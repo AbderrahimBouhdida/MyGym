@@ -46,7 +46,6 @@ void afficher (GtkWidget *plistview){
 	GtkListStore *liststore;
 	GtkCellRenderer *celrender;
 	GtkTreeViewColumn *col;
-
 	liststore = gtk_list_store_new(NUM_COLS, G_TYPE_BOOLEAN, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_UINT);
         char login[20],pass[20];
         int role;
@@ -64,7 +63,6 @@ void afficher (GtkWidget *plistview){
 			                      -1);
 	                printf("%s %s %d\n",login,pass,role);
 	        }
-		plistview = gtk_tree_view_new_with_model(GTK_TREE_MODEL(liststore));
 
 		celrender = gtk_cell_renderer_toggle_new();
 		col = gtk_tree_view_column_new_with_attributes(" ",celrender,"active",COL_TOGG,NULL);
@@ -75,13 +73,21 @@ void afficher (GtkWidget *plistview){
 		gtk_tree_view_append_column(GTK_TREE_VIEW(plistview),col);
 
 		celrender = gtk_cell_renderer_text_new();
-		col = gtk_tree_view_column_new_with_attributes("Password",celrender,"text",COL_NAME,NULL);
+		col = gtk_tree_view_column_new_with_attributes("Password",celrender,"text",COL_PASS,NULL);
 		gtk_tree_view_append_column(GTK_TREE_VIEW(plistview),col);
 
 		celrender = gtk_cell_renderer_text_new();
-		col = gtk_tree_view_column_new_with_attributes("role",celrender,"text",COL_NAME,NULL);
+		col = gtk_tree_view_column_new_with_attributes("role",celrender,"text",COL_ROLE,NULL);
 		gtk_tree_view_append_column(GTK_TREE_VIEW(plistview),col);
 
+		gtk_tree_view_set_model (GTK_TREE_VIEW(plistview), GTK_TREE_MODEL (liststore));
+		//pScrollbar = gtk_scrolled_window_new(NULL, NULL);
+	    	//gtk_scrolled_window_set_policy(GTK_FIXED("fixed5"),
+	      	//	 	               GTK_POLICY_AUTOMATIC,
+	        //			       GTK_POLICY_AUTOMATIC);
+	    	//gtk_container_add(GTK_CONTAINER(pScrollbar), plistview);
+	    	//gtk_fixed_put(GTK_FIXED(win), plistview,35,35);
+//	    	gtk_widget_show(plistview);
 
 	}
         fclose(f);

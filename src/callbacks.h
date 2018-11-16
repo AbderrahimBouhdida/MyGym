@@ -40,3 +40,9 @@ on_add_clicked                         (GtkWidget       *graphic,
 void
 on_user_list_exit_clicked              (GtkWidget	*graphic,
                                         gpointer         user_data);
+
+void
+on_users_list_row_activated            (GtkTreeView     *treeview,
+                                        GtkTreePath     *path,
+                                        GtkTreeViewColumn *column,
+                                        gpointer         user_data);

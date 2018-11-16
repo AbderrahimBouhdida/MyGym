@@ -125,13 +125,13 @@ on_quit_clicked                        (GtkWidget       *graphic,
 void
 on_users_clicked                       (GtkWidget       *graphic,
                                         gpointer         user_data)
-{	GtkWidget *userlist;
-	GtkWidget *listview;
-	listview = lookup_widget(graphic,"users_list");
-	userlist = create_userlist();
-	gtk_widget_show(userlist);
-	afficher(listview);
-
+{
+        GtkWidget *plistview;
+        GtkWidget *newi;
+	newi = create_userlist();
+        plistview = lookup_widget(newi,"users_list");
+	afficher(plistview);
+        gtk_widget_show(newi);
 }
 
 
@@ -143,5 +143,19 @@ on_user_list_exit_clicked              (GtkWidget       *graphic,
 	current = lookup_widget(graphic,"userlist");
 	gtk_widget_hide(current);
 
+}
+
+void
+on_users_list_row_activated            (GtkTreeView     *treeview,
+                                        GtkTreePath     *path,
+                                        GtkTreeViewColumn *column,
+                                        gpointer         user_data)
+{
+	   gchar *string;
+	   GtkTreeIter iter;
+	   GtkTreeModel *model = gtk_tree_view_get_model (treeview);
+	   gtk_tree_model_get_iter(model, &iter, path);
+	   gtk_tree_model_get (model, &iter, 2, &string, -1);
+	   printf ("activated: %s\n", string);
 }
 
