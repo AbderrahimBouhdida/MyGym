@@ -1,0 +1,13 @@
+
+admin admin 1
+kine kine 2
+medecin medecin 3
+coach coach 4
+adherent adherent 5
+diet diet 6
+hello world 5
+houssem alimi 5
+ammar khasskh 6
+medic medic 5
+youssef youssef 1
+nizar nizar 1
