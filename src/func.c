@@ -7,7 +7,7 @@ int verifier(char user[], char pass[],char status[]){
 	char user_f[20],pass_f[20];
 	int role;
 	FILE *f;
-	f = fopen("/home/imou/Desktop/projects/mygym/login/src/users.txt","r");
+	f = fopen("/home/youssef/Desktop/MyGym/src/users.txt","r");
 	if(f!=NULL){
 		while(fscanf(f,"%s %s %d",user_f,pass_f,&role)!=EOF){
 			if(!strcmp(user,user_f) && !strcmp(pass,pass_f)){

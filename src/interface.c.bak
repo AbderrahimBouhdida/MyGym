@@ -288,9 +288,9 @@ create_userlist (void)
 {
   GtkWidget *userlist;
   GtkWidget *fixed5;
-  GtkWidget *listview;
   GtkWidget *user_list_exit;
   GtkWidget *add;
+  GtkWidget *users_list;
 
   userlist = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_widget_set_size_request (userlist, 500, 300);
@@ -299,11 +299,6 @@ create_userlist (void)
   fixed5 = gtk_fixed_new ();
   gtk_widget_show (fixed5);
   gtk_container_add (GTK_CONTAINER (userlist), fixed5);
-
-  listview = gtk_tree_view_new ();
-  gtk_widget_show (listview);
-  gtk_fixed_put (GTK_FIXED (fixed5), listview, 32, 16);
-  gtk_widget_set_size_request (listview, 352, 232);
 
   user_list_exit = gtk_button_new_with_mnemonic (_("sortir"));
   gtk_widget_show (user_list_exit);
@@ -315,6 +310,11 @@ create_userlist (void)
   gtk_fixed_put (GTK_FIXED (fixed5), add, 392, 16);
   gtk_widget_set_size_request (add, 70, 33);
 
+  users_list = gtk_tree_view_new ();
+  gtk_widget_show (users_list);
+  gtk_fixed_put (GTK_FIXED (fixed5), users_list, 24, 32);
+  gtk_widget_set_size_request (users_list, 300, 200);
+
   g_signal_connect ((gpointer) user_list_exit, "clicked",
                     G_CALLBACK (on_user_list_exit_clicked),
                     NULL);
@@ -325,9 +325,9 @@ create_userlist (void)
   /* Store pointers to all widgets, for use by lookup_widget(). */
   GLADE_HOOKUP_OBJECT_NO_REF (userlist, userlist, "userlist");
   GLADE_HOOKUP_OBJECT (userlist, fixed5, "fixed5");
-  GLADE_HOOKUP_OBJECT (userlist, listview, "listview");
   GLADE_HOOKUP_OBJECT (userlist, user_list_exit, "user_list_exit");
   GLADE_HOOKUP_OBJECT (userlist, add, "add");
+  GLADE_HOOKUP_OBJECT (userlist, users_list, "users_list");
 
   return userlist;
 }
