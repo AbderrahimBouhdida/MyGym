@@ -7,4 +7,3 @@ GtkWidget* create_admin (void);
 GtkWidget* create_kine (void);
 GtkWidget* create_add (void);
 GtkWidget* create_userlist (void);
-GtkWidget* create_window1 (void);

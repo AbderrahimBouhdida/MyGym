@@ -33,11 +33,11 @@ create_MyWindow (void)
   GtkWidget *fixed1;
   GtkWidget *username;
   GtkWidget *pass;
-  GtkWidget *status;
   GtkWidget *label1;
   GtkWidget *label2;
   GtkWidget *login;
   GtkWidget *quit;
+  GtkWidget *status;
 
   MyWindow = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_widget_set_size_request (MyWindow, 500, 300);
@@ -61,11 +61,6 @@ create_MyWindow (void)
   gtk_entry_set_visibility (GTK_ENTRY (pass), FALSE);
   gtk_entry_set_invisible_char (GTK_ENTRY (pass), 9679);
 
-  status = gtk_label_new (_("hello"));
-  gtk_widget_show (status);
-  gtk_fixed_put (GTK_FIXED (fixed1), status, 104, 32);
-  gtk_widget_set_size_request (status, 284, 16);
-
   label1 = gtk_label_new (_("Username"));
   gtk_widget_show (label1);
   gtk_fixed_put (GTK_FIXED (fixed1), label1, 72, 80);
@@ -86,6 +81,11 @@ create_MyWindow (void)
   gtk_fixed_put (GTK_FIXED (fixed1), quit, 256, 208);
   gtk_widget_set_size_request (quit, 70, 33);
 
+  status = gtk_label_new (_("hello !"));
+  gtk_widget_show (status);
+  gtk_fixed_put (GTK_FIXED (fixed1), status, 104, 32);
+  gtk_widget_set_size_request (status, 284, 16);
+
   g_signal_connect ((gpointer) login, "clicked",
                     G_CALLBACK (on_login_clicked),
                     NULL);
@@ -98,11 +98,11 @@ create_MyWindow (void)
   GLADE_HOOKUP_OBJECT (MyWindow, fixed1, "fixed1");
   GLADE_HOOKUP_OBJECT (MyWindow, username, "username");
   GLADE_HOOKUP_OBJECT (MyWindow, pass, "pass");
-  GLADE_HOOKUP_OBJECT (MyWindow, status, "status");
   GLADE_HOOKUP_OBJECT (MyWindow, label1, "label1");
   GLADE_HOOKUP_OBJECT (MyWindow, label2, "label2");
   GLADE_HOOKUP_OBJECT (MyWindow, login, "login");
   GLADE_HOOKUP_OBJECT (MyWindow, quit, "quit");
+  GLADE_HOOKUP_OBJECT (MyWindow, status, "status");
 
   return MyWindow;
 }
@@ -330,25 +330,5 @@ create_userlist (void)
   GLADE_HOOKUP_OBJECT (userlist, users_list, "users_list");
 
   return userlist;
-}
-
-GtkWidget*
-create_window1 (void)
-{
-  GtkWidget *window1;
-  GtkWidget *fixed6;
-
-  window1 = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-  gtk_window_set_title (GTK_WINDOW (window1), _("window1"));
-
-  fixed6 = gtk_fixed_new ();
-  gtk_widget_show (fixed6);
-  gtk_container_add (GTK_CONTAINER (window1), fixed6);
-
-  /* Store pointers to all widgets, for use by lookup_widget(). */
-  GLADE_HOOKUP_OBJECT_NO_REF (window1, window1, "window1");
-  GLADE_HOOKUP_OBJECT (window1, fixed6, "fixed6");
-
-  return window1;
 }
 

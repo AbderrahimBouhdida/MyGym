@@ -127,9 +127,9 @@ on_users_clicked                       (GtkWidget       *graphic,
                                         gpointer         user_data)
 {	GtkWidget *userlist;
 	GtkWidget *listview;
+	listview = lookup_widget(graphic,"users_list");
 	userlist = create_userlist();
 	gtk_widget_show(userlist);
-	listview = lookup_widget(graphic,"users_list");
 	afficher(listview);
 
 }
