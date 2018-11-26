@@ -46,3 +46,23 @@ on_users_list_row_activated            (GtkTreeView     *treeview,
                                         GtkTreePath     *path,
                                         GtkTreeViewColumn *column,
                                         gpointer         user_data);
+
+void
+on_staff_clicked                       (GtkWidget	*graphic,
+                                        gpointer         user_data);
+
+void
+on_quit_st_clicked                     (GtkWidget	*graphic,
+                                        gpointer         user_data);
+
+void
+on_add_new_st_clicked                  (GtkWidget	*graphic,
+                                        gpointer         user_data);
+
+void
+on_add_st_clicked                      (GtkWidget	*graphic,
+                                        gpointer         user_data);
+
+void
+on_quit_st_list_clicked                (GtkWidget	*graphic,
+                                        gpointer         user_data);
