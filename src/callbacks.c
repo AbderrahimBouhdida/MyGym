@@ -80,8 +80,11 @@ on_add_clicked                         (GtkWidget       *graphic,
                                         gpointer         user_data)
 {
 	GtkWidget *add;
+	GtkWidget *current;
+	current = lookup_widget(graphic,"userlist");
 	add = create_add();
 	gtk_widget_show(add);
+	gtk_widget_hide(current);
 }
 
 
@@ -129,8 +132,14 @@ on_quit1_clicked                       (GtkWidget       *graphic,
                                         gpointer         user_data)
 {
 	GtkWidget *current;
+	GtkWidget *plistview;
+        GtkWidget *newi;
+	newi = create_userlist();
+        plistview = lookup_widget(newi,"users_list");
+	afficher(plistview,"user");
 	current = lookup_widget(graphic,"add");
 	gtk_widget_hide(current);
+	gtk_widget_show(newi);
 }
 
 
