@@ -20,6 +20,10 @@ on_login_clicked                       (GtkWidget       *graphic,
 	GtkWidget *text_lbl;
 	GtkWidget *admin;
 	GtkWidget *kine;
+	GtkWidget *coach;
+	GtkWidget *adherant;
+	GtkWidget *medecin;
+	GtkWidget *diet;
 	GtkWidget *current;
 
 	char user[20],pass[20],status[20];
@@ -41,9 +45,29 @@ on_login_clicked                       (GtkWidget       *graphic,
 			gtk_widget_hide(current);
 			break;
 		case 2 :
-			kine = create_kine();
+			/*adherant = create_adherant();
+			gtk_widget_show(adherant);
+			gtk_widget_hide(current);*/
+			break;
+		case 3 :
+			/*coach = create_coach();
+			gtk_widget_show(coach);
+			gtk_widget_hide(current);*/
+			break;
+		case 4 :
+			/*diet = create_diet();
+			gtk_widget_show(diet);
+			gtk_widget_hide(current);*/
+			break;
+		case 5 :
+			/*kine = create_kine();
 			gtk_widget_show(kine);
-			gtk_widget_hide(current);
+			gtk_widget_hide(current);*/
+			break;
+		case 6 :
+			/*medecin = create_medecin();
+			gtk_widget_show(medecin);
+			gtk_widget_hide(current);*/
 			break;
 		default :
 			gtk_label_set_text(GTK_LABEL(status_d),status);
