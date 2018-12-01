@@ -9,3 +9,5 @@ GtkWidget* create_add (void);
 GtkWidget* create_userlist (void);
 GtkWidget* create_staff_add (void);
 GtkWidget* create_stafflist (void);
+GtkWidget* create_mod_user (void);
+GtkWidget* create_mod_st (void);

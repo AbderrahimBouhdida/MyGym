@@ -66,3 +66,25 @@ on_add_st_clicked                      (GtkWidget	*graphic,
 void
 on_quit_st_list_clicked                (GtkWidget	*graphic,
                                         gpointer         user_data);
+
+void
+on_mod_user_btn_clicked                (GtkWidget       *button,
+                                        gpointer         user_data);
+
+void
+on_mod_user_exit_clicked               (GtkWidget       *button,
+                                        gpointer         user_data);
+
+void
+on_treeview2_row_activated             (GtkTreeView     *treeview,
+                                        GtkTreePath     *path,
+                                        GtkTreeViewColumn *column,
+                                        gpointer         user_data);
+
+void
+on_mod_st_exit_clicked                 (GtkWidget       *graphic,
+                                        gpointer         user_data);
+
+void
+on_mod_st_btn_clicked                  (GtkWidget       *graphic,
+                                        gpointer         user_data);

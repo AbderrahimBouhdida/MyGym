@@ -244,6 +244,8 @@ create_add (void)
   GtkWidget *status_add_ad;
   GtkWidget *label6;
   GtkWidget *label7;
+  GtkWidget *label33;
+  GtkWidget *cin_ad;
 
   add = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_widget_set_size_request (add, 600, 400);
@@ -383,6 +385,17 @@ create_add (void)
   gtk_widget_set_size_request (label7, 112, 16);
   gtk_label_set_line_wrap (GTK_LABEL (label7), TRUE);
 
+  label33 = gtk_label_new (_("Cin"));
+  gtk_widget_show (label33);
+  gtk_fixed_put (GTK_FIXED (fixed4), label33, 40, 336);
+  gtk_widget_set_size_request (label33, 49, 17);
+
+  cin_ad = gtk_entry_new ();
+  gtk_widget_show (cin_ad);
+  gtk_fixed_put (GTK_FIXED (fixed4), cin_ad, 168, 320);
+  gtk_widget_set_size_request (cin_ad, 172, 34);
+  gtk_entry_set_invisible_char (GTK_ENTRY (cin_ad), 8226);
+
   g_signal_connect ((gpointer) add_new, "clicked",
                     G_CALLBACK (on_add_new_clicked),
                     NULL);
@@ -415,6 +428,8 @@ create_add (void)
   GLADE_HOOKUP_OBJECT (add, status_add_ad, "status_add_ad");
   GLADE_HOOKUP_OBJECT (add, label6, "label6");
   GLADE_HOOKUP_OBJECT (add, label7, "label7");
+  GLADE_HOOKUP_OBJECT (add, label33, "label33");
+  GLADE_HOOKUP_OBJECT (add, cin_ad, "cin_ad");
 
   return add;
 }
@@ -510,6 +525,8 @@ create_staff_add (void)
   GtkWidget *label25;
   GtkWidget *quit_st;
   GtkWidget *add_new_st;
+  GtkWidget *label35;
+  GtkWidget *cin_st;
 
   staff_add = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_widget_set_size_request (staff_add, 600, 400);
@@ -660,6 +677,17 @@ create_staff_add (void)
   gtk_fixed_put (GTK_FIXED (fixed6), add_new_st, 376, 352);
   gtk_widget_set_size_request (add_new_st, 70, 33);
 
+  label35 = gtk_label_new (_("cin"));
+  gtk_widget_show (label35);
+  gtk_fixed_put (GTK_FIXED (fixed6), label35, 24, 328);
+  gtk_widget_set_size_request (label35, 49, 17);
+
+  cin_st = gtk_entry_new ();
+  gtk_widget_show (cin_st);
+  gtk_fixed_put (GTK_FIXED (fixed6), cin_st, 168, 328);
+  gtk_widget_set_size_request (cin_st, 172, 34);
+  gtk_entry_set_invisible_char (GTK_ENTRY (cin_st), 8226);
+
   g_signal_connect ((gpointer) quit_st, "clicked",
                     G_CALLBACK (on_quit_st_clicked),
                     NULL);
@@ -693,6 +721,8 @@ create_staff_add (void)
   GLADE_HOOKUP_OBJECT (staff_add, label25, "label25");
   GLADE_HOOKUP_OBJECT (staff_add, quit_st, "quit_st");
   GLADE_HOOKUP_OBJECT (staff_add, add_new_st, "add_new_st");
+  GLADE_HOOKUP_OBJECT (staff_add, label35, "label35");
+  GLADE_HOOKUP_OBJECT (staff_add, cin_st, "cin_st");
 
   return staff_add;
 }
@@ -735,6 +765,9 @@ create_stafflist (void)
   gtk_fixed_put (GTK_FIXED (fixed7), quit_st_list, 1256, 88);
   gtk_widget_set_size_request (quit_st_list, 104, 32);
 
+  g_signal_connect ((gpointer) treeview2, "row_activated",
+                    G_CALLBACK (on_treeview2_row_activated),
+                    NULL);
   g_signal_connect ((gpointer) add_st, "clicked",
                     G_CALLBACK (on_add_st_clicked),
                     NULL);
@@ -751,5 +784,302 @@ create_stafflist (void)
   GLADE_HOOKUP_OBJECT (stafflist, quit_st_list, "quit_st_list");
 
   return stafflist;
+}
+
+GtkWidget*
+create_mod_user (void)
+{
+  GtkWidget *mod_user;
+  GtkWidget *fixed8;
+  GtkWidget *mod_name;
+  GtkWidget *mod_prenom;
+  GtkWidget *mod_login;
+  GtkWidget *mod_pass;
+  GtkWidget *mod_tel;
+  GtkWidget *mod_email;
+  GtkWidget *mod_cin;
+  GtkWidget *label32;
+  GtkWidget *label31;
+  GtkWidget *_;
+  GtkWidget *log_l;
+  GtkWidget *nom_l;
+  GtkWidget *user_l;
+  GtkWidget *label34;
+  GtkWidget *mod_user_btn;
+  GtkWidget *mod_user_exit;
+
+  mod_user = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+  gtk_window_set_title (GTK_WINDOW (mod_user), _("Modifier Informton Personnelles"));
+
+  fixed8 = gtk_fixed_new ();
+  gtk_widget_show (fixed8);
+  gtk_container_add (GTK_CONTAINER (mod_user), fixed8);
+
+  mod_name = gtk_entry_new ();
+  gtk_widget_show (mod_name);
+  gtk_fixed_put (GTK_FIXED (fixed8), mod_name, 128, 72);
+  gtk_widget_set_size_request (mod_name, 172, 34);
+  gtk_entry_set_text (GTK_ENTRY (mod_name), _("hello"));
+  gtk_entry_set_invisible_char (GTK_ENTRY (mod_name), 8226);
+
+  mod_prenom = gtk_entry_new ();
+  gtk_widget_show (mod_prenom);
+  gtk_fixed_put (GTK_FIXED (fixed8), mod_prenom, 128, 120);
+  gtk_widget_set_size_request (mod_prenom, 172, 34);
+  gtk_entry_set_invisible_char (GTK_ENTRY (mod_prenom), 8226);
+
+  mod_login = gtk_entry_new ();
+  gtk_widget_show (mod_login);
+  gtk_fixed_put (GTK_FIXED (fixed8), mod_login, 128, 168);
+  gtk_widget_set_size_request (mod_login, 172, 34);
+  gtk_entry_set_invisible_char (GTK_ENTRY (mod_login), 8226);
+
+  mod_pass = gtk_entry_new ();
+  gtk_widget_show (mod_pass);
+  gtk_fixed_put (GTK_FIXED (fixed8), mod_pass, 128, 216);
+  gtk_widget_set_size_request (mod_pass, 172, 34);
+  gtk_entry_set_invisible_char (GTK_ENTRY (mod_pass), 8226);
+
+  mod_tel = gtk_entry_new ();
+  gtk_widget_show (mod_tel);
+  gtk_fixed_put (GTK_FIXED (fixed8), mod_tel, 128, 264);
+  gtk_widget_set_size_request (mod_tel, 172, 34);
+  gtk_entry_set_invisible_char (GTK_ENTRY (mod_tel), 8226);
+
+  mod_email = gtk_entry_new ();
+  gtk_widget_show (mod_email);
+  gtk_fixed_put (GTK_FIXED (fixed8), mod_email, 128, 312);
+  gtk_widget_set_size_request (mod_email, 172, 34);
+  gtk_entry_set_invisible_char (GTK_ENTRY (mod_email), 8226);
+
+  mod_cin = gtk_entry_new ();
+  gtk_widget_show (mod_cin);
+  gtk_fixed_put (GTK_FIXED (fixed8), mod_cin, 128, 24);
+  gtk_widget_set_size_request (mod_cin, 172, 34);
+  gtk_editable_set_editable (GTK_EDITABLE (mod_cin), FALSE);
+  gtk_entry_set_invisible_char (GTK_ENTRY (mod_cin), 8226);
+
+  label32 = gtk_label_new (_("email"));
+  gtk_widget_show (label32);
+  gtk_fixed_put (GTK_FIXED (fixed8), label32, 32, 320);
+  gtk_widget_set_size_request (label32, 49, 17);
+
+  label31 = gtk_label_new (_("tel"));
+  gtk_widget_show (label31);
+  gtk_fixed_put (GTK_FIXED (fixed8), label31, 24, 272);
+  gtk_widget_set_size_request (label31, 49, 17);
+
+  _ = gtk_label_new (_("mot de passe"));
+  gtk_widget_show (_);
+  gtk_fixed_put (GTK_FIXED (fixed8), _, 24, 216);
+  gtk_widget_set_size_request (_, 104, 24);
+
+  log_l = gtk_label_new (_("login"));
+  gtk_widget_show (log_l);
+  gtk_fixed_put (GTK_FIXED (fixed8), log_l, 24, 176);
+  gtk_widget_set_size_request (log_l, 49, 17);
+
+  nom_l = gtk_label_new (_("prenom"));
+  gtk_widget_show (nom_l);
+  gtk_fixed_put (GTK_FIXED (fixed8), nom_l, 24, 120);
+  gtk_widget_set_size_request (nom_l, 72, 24);
+
+  user_l = gtk_label_new (_("Nom"));
+  gtk_widget_show (user_l);
+  gtk_fixed_put (GTK_FIXED (fixed8), user_l, 16, 80);
+  gtk_widget_set_size_request (user_l, 64, 16);
+
+  label34 = gtk_label_new (_("Cin"));
+  gtk_widget_show (label34);
+  gtk_fixed_put (GTK_FIXED (fixed8), label34, 8, 32);
+  gtk_widget_set_size_request (label34, 64, 24);
+
+  mod_user_btn = gtk_button_new_with_mnemonic (_("Modifier"));
+  gtk_widget_show (mod_user_btn);
+  gtk_fixed_put (GTK_FIXED (fixed8), mod_user_btn, 288, 384);
+  gtk_widget_set_size_request (mod_user_btn, 70, 33);
+
+  mod_user_exit = gtk_button_new_with_mnemonic (_("sortir"));
+  gtk_widget_show (mod_user_exit);
+  gtk_fixed_put (GTK_FIXED (fixed8), mod_user_exit, 376, 384);
+  gtk_widget_set_size_request (mod_user_exit, 70, 33);
+
+  g_signal_connect ((gpointer) mod_user_btn, "clicked",
+                    G_CALLBACK (on_mod_user_btn_clicked),
+                    NULL);
+  g_signal_connect ((gpointer) mod_user_exit, "clicked",
+                    G_CALLBACK (on_mod_user_exit_clicked),
+                    NULL);
+
+  /* Store pointers to all widgets, for use by lookup_widget(). */
+  GLADE_HOOKUP_OBJECT_NO_REF (mod_user, mod_user, "mod_user");
+  GLADE_HOOKUP_OBJECT (mod_user, fixed8, "fixed8");
+  GLADE_HOOKUP_OBJECT (mod_user, mod_name, "mod_name");
+  GLADE_HOOKUP_OBJECT (mod_user, mod_prenom, "mod_prenom");
+  GLADE_HOOKUP_OBJECT (mod_user, mod_login, "mod_login");
+  GLADE_HOOKUP_OBJECT (mod_user, mod_pass, "mod_pass");
+  GLADE_HOOKUP_OBJECT (mod_user, mod_tel, "mod_tel");
+  GLADE_HOOKUP_OBJECT (mod_user, mod_email, "mod_email");
+  GLADE_HOOKUP_OBJECT (mod_user, mod_cin, "mod_cin");
+  GLADE_HOOKUP_OBJECT (mod_user, label32, "label32");
+  GLADE_HOOKUP_OBJECT (mod_user, label31, "label31");
+  GLADE_HOOKUP_OBJECT (mod_user, _, "_");
+  GLADE_HOOKUP_OBJECT (mod_user, log_l, "log_l");
+  GLADE_HOOKUP_OBJECT (mod_user, nom_l, "nom_l");
+  GLADE_HOOKUP_OBJECT (mod_user, user_l, "user_l");
+  GLADE_HOOKUP_OBJECT (mod_user, label34, "label34");
+  GLADE_HOOKUP_OBJECT (mod_user, mod_user_btn, "mod_user_btn");
+  GLADE_HOOKUP_OBJECT (mod_user, mod_user_exit, "mod_user_exit");
+
+  return mod_user;
+}
+
+GtkWidget*
+create_mod_st (void)
+{
+  GtkWidget *mod_st;
+  GtkWidget *fixed9;
+  GtkWidget *mod_cin_st;
+  GtkWidget *mod_name_st;
+  GtkWidget *mod_prenom_st;
+  GtkWidget *mod_login_st;
+  GtkWidget *mod_pass_st;
+  GtkWidget *mod_tel_st;
+  GtkWidget *label36;
+  GtkWidget *label37;
+  GtkWidget *label38;
+  GtkWidget *label39;
+  GtkWidget *label40;
+  GtkWidget *label41;
+  GtkWidget *label42;
+  GtkWidget *mod_email_st;
+  GtkWidget *mod_st_exit;
+  GtkWidget *mod_st_btn;
+
+  mod_st = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+  gtk_window_set_title (GTK_WINDOW (mod_st), _("Modifier information Staff"));
+
+  fixed9 = gtk_fixed_new ();
+  gtk_widget_show (fixed9);
+  gtk_container_add (GTK_CONTAINER (mod_st), fixed9);
+
+  mod_cin_st = gtk_entry_new ();
+  gtk_widget_show (mod_cin_st);
+  gtk_fixed_put (GTK_FIXED (fixed9), mod_cin_st, 144, 24);
+  gtk_widget_set_size_request (mod_cin_st, 172, 34);
+  GTK_WIDGET_UNSET_FLAGS (mod_cin_st, GTK_CAN_FOCUS);
+  gtk_editable_set_editable (GTK_EDITABLE (mod_cin_st), FALSE);
+  gtk_entry_set_invisible_char (GTK_ENTRY (mod_cin_st), 8226);
+
+  mod_name_st = gtk_entry_new ();
+  gtk_widget_show (mod_name_st);
+  gtk_fixed_put (GTK_FIXED (fixed9), mod_name_st, 144, 72);
+  gtk_widget_set_size_request (mod_name_st, 172, 34);
+  gtk_entry_set_invisible_char (GTK_ENTRY (mod_name_st), 8226);
+
+  mod_prenom_st = gtk_entry_new ();
+  gtk_widget_show (mod_prenom_st);
+  gtk_fixed_put (GTK_FIXED (fixed9), mod_prenom_st, 144, 120);
+  gtk_widget_set_size_request (mod_prenom_st, 172, 34);
+  gtk_entry_set_invisible_char (GTK_ENTRY (mod_prenom_st), 8226);
+
+  mod_login_st = gtk_entry_new ();
+  gtk_widget_show (mod_login_st);
+  gtk_fixed_put (GTK_FIXED (fixed9), mod_login_st, 144, 168);
+  gtk_widget_set_size_request (mod_login_st, 172, 34);
+  gtk_entry_set_invisible_char (GTK_ENTRY (mod_login_st), 8226);
+
+  mod_pass_st = gtk_entry_new ();
+  gtk_widget_show (mod_pass_st);
+  gtk_fixed_put (GTK_FIXED (fixed9), mod_pass_st, 144, 216);
+  gtk_widget_set_size_request (mod_pass_st, 172, 34);
+  gtk_entry_set_invisible_char (GTK_ENTRY (mod_pass_st), 8226);
+
+  mod_tel_st = gtk_entry_new ();
+  gtk_widget_show (mod_tel_st);
+  gtk_fixed_put (GTK_FIXED (fixed9), mod_tel_st, 144, 264);
+  gtk_widget_set_size_request (mod_tel_st, 172, 34);
+  gtk_entry_set_invisible_char (GTK_ENTRY (mod_tel_st), 8226);
+
+  label36 = gtk_label_new (_("cin"));
+  gtk_widget_show (label36);
+  gtk_fixed_put (GTK_FIXED (fixed9), label36, 16, 32);
+  gtk_widget_set_size_request (label36, 49, 17);
+
+  label37 = gtk_label_new (_("nom"));
+  gtk_widget_show (label37);
+  gtk_fixed_put (GTK_FIXED (fixed9), label37, 24, 80);
+  gtk_widget_set_size_request (label37, 49, 17);
+
+  label38 = gtk_label_new (_("prenom"));
+  gtk_widget_show (label38);
+  gtk_fixed_put (GTK_FIXED (fixed9), label38, 32, 128);
+  gtk_widget_set_size_request (label38, 49, 17);
+
+  label39 = gtk_label_new (_("login"));
+  gtk_widget_show (label39);
+  gtk_fixed_put (GTK_FIXED (fixed9), label39, 24, 176);
+  gtk_widget_set_size_request (label39, 49, 17);
+
+  label40 = gtk_label_new (_("mot de passe"));
+  gtk_widget_show (label40);
+  gtk_fixed_put (GTK_FIXED (fixed9), label40, 32, 224);
+  gtk_widget_set_size_request (label40, 96, 16);
+  gtk_label_set_line_wrap (GTK_LABEL (label40), TRUE);
+
+  label41 = gtk_label_new (_("tel"));
+  gtk_widget_show (label41);
+  gtk_fixed_put (GTK_FIXED (fixed9), label41, 16, 272);
+  gtk_widget_set_size_request (label41, 49, 17);
+
+  label42 = gtk_label_new (_("email"));
+  gtk_widget_show (label42);
+  gtk_fixed_put (GTK_FIXED (fixed9), label42, 24, 320);
+  gtk_widget_set_size_request (label42, 49, 17);
+
+  mod_email_st = gtk_entry_new ();
+  gtk_widget_show (mod_email_st);
+  gtk_fixed_put (GTK_FIXED (fixed9), mod_email_st, 144, 312);
+  gtk_widget_set_size_request (mod_email_st, 172, 34);
+  gtk_entry_set_invisible_char (GTK_ENTRY (mod_email_st), 8226);
+
+  mod_st_exit = gtk_button_new_with_mnemonic (_("sortir"));
+  gtk_widget_show (mod_st_exit);
+  gtk_fixed_put (GTK_FIXED (fixed9), mod_st_exit, 320, 376);
+  gtk_widget_set_size_request (mod_st_exit, 70, 33);
+
+  mod_st_btn = gtk_button_new_with_mnemonic (_("Modifier"));
+  gtk_widget_show (mod_st_btn);
+  gtk_fixed_put (GTK_FIXED (fixed9), mod_st_btn, 232, 376);
+  gtk_widget_set_size_request (mod_st_btn, 70, 33);
+
+  g_signal_connect ((gpointer) mod_st_exit, "clicked",
+                    G_CALLBACK (on_mod_st_exit_clicked),
+                    NULL);
+  g_signal_connect ((gpointer) mod_st_btn, "clicked",
+                    G_CALLBACK (on_mod_st_btn_clicked),
+                    NULL);
+
+  /* Store pointers to all widgets, for use by lookup_widget(). */
+  GLADE_HOOKUP_OBJECT_NO_REF (mod_st, mod_st, "mod_st");
+  GLADE_HOOKUP_OBJECT (mod_st, fixed9, "fixed9");
+  GLADE_HOOKUP_OBJECT (mod_st, mod_cin_st, "mod_cin_st");
+  GLADE_HOOKUP_OBJECT (mod_st, mod_name_st, "mod_name_st");
+  GLADE_HOOKUP_OBJECT (mod_st, mod_prenom_st, "mod_prenom_st");
+  GLADE_HOOKUP_OBJECT (mod_st, mod_login_st, "mod_login_st");
+  GLADE_HOOKUP_OBJECT (mod_st, mod_pass_st, "mod_pass_st");
+  GLADE_HOOKUP_OBJECT (mod_st, mod_tel_st, "mod_tel_st");
+  GLADE_HOOKUP_OBJECT (mod_st, label36, "label36");
+  GLADE_HOOKUP_OBJECT (mod_st, label37, "label37");
+  GLADE_HOOKUP_OBJECT (mod_st, label38, "label38");
+  GLADE_HOOKUP_OBJECT (mod_st, label39, "label39");
+  GLADE_HOOKUP_OBJECT (mod_st, label40, "label40");
+  GLADE_HOOKUP_OBJECT (mod_st, label41, "label41");
+  GLADE_HOOKUP_OBJECT (mod_st, label42, "label42");
+  GLADE_HOOKUP_OBJECT (mod_st, mod_email_st, "mod_email_st");
+  GLADE_HOOKUP_OBJECT (mod_st, mod_st_exit, "mod_st_exit");
+  GLADE_HOOKUP_OBJECT (mod_st, mod_st_btn, "mod_st_btn");
+
+  return mod_st;
 }
 
