@@ -4,10 +4,13 @@
 
 GtkWidget* create_MyWindow (void);
 GtkWidget* create_admin (void);
-GtkWidget* create_kine (void);
 GtkWidget* create_add (void);
 GtkWidget* create_userlist (void);
 GtkWidget* create_staff_add (void);
 GtkWidget* create_stafflist (void);
 GtkWidget* create_mod_user (void);
 GtkWidget* create_mod_st (void);
+GtkWidget* create_kine (void);
+GtkWidget* create_sceance_kine (void);
+GtkWidget* create_profile_kine (void);
+GtkWidget* create_ajouter_seance_kine (void);

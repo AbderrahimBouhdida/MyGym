@@ -4,15 +4,17 @@
 #include"func.h"
 
 int verifier(char user[], char pass[],char status[]){
-	char user_f[20],pass_f[20],cin[20];
-	int role;
+	char login[20], password[20], nom[20], prenom[20], email[20], tel[20],rolen[20],cin[20];
+	int day, month, year, role;
 	FILE *f;
-	f = fopen("/home/imou/Desktop/projects/mygym/login/src/users.txt","r");
+	f = fopen("src/users.txt","r");
 	if(f!=NULL){
-		while(fscanf(f,"%s %s %s %d",cin,user_f,pass_f,&role)!=EOF){
-			if(!strcmp(user,user_f) && !strcmp(pass,pass_f)){
+		while(fscanf(f,"%s %s %s %d %s %s %s %s %d %d %d",cin, login,password,&role,nom,prenom,email,tel,&day,&month,&year)!=EOF){
+			printf("%d \n",role);
+			if(!strcmp(user,login) && !strcmp(pass,password)){
 				strcpy(status,user);
 				fclose(f);
+				printf("in %d ",role);
 				return role;
 			}
 		}
@@ -26,7 +28,7 @@ int verifier(char user[], char pass[],char status[]){
 }
 void ajouter (char cin[],char login[],char password[],char nom[],char prenom[],char email[],char tel[],int day,int month,int year, int role){
         FILE* f;
-	f=fopen("/home/imou/Desktop/projects/mygym/login/src/users.txt","a");
+	f=fopen("src/users.txt","a");
 	if(f!=NULL){
 		 fprintf(f,"%s %s %s %d %s %s %s %s %d %d %d\n",cin,login,password,role,nom,prenom,email,tel,day,month,year);
         }
@@ -58,7 +60,7 @@ void afficher (GtkWidget *plistview, char type[20]){
 	
 	liststore = gtk_list_store_new(NUM_COLS, G_TYPE_BOOLEAN, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING,G_TYPE_STRING);
         FILE* f;
-        f=fopen("/home/imou/Desktop/projects/mygym/login/src/users.txt","r");
+        f=fopen("src/users.txt","r");
         if(f!=NULL){
 		while(fscanf(f,"%s %s %s %d %s %s %s %s %d %d %d",cin, login,password,&role,nom,prenom,email,tel,&day,&month,&year)!=EOF){
 			GtkTreeIter iter;

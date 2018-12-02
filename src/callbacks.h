@@ -88,3 +88,37 @@ on_mod_st_exit_clicked                 (GtkWidget       *graphic,
 void
 on_mod_st_btn_clicked                  (GtkWidget       *graphic,
                                         gpointer         user_data);
+
+void
+on_ajouter_rdv_kine_clicked            (GtkWidget       *objet_graphique,
+                                        gpointer         user_data);
+
+void
+on_retour_profil_kine_clicked          (GtkWidget       *objet_graphique,
+                                        gpointer         user_data);
+
+
+void
+on_ajouter_seance_kine_clicked         (GtkWidget      *objet_graphique,
+                                        gpointer         user_data);
+
+
+void
+on_retour_seance_kine_clicked          (GtkWidget       *objet_graphique,
+                                        gpointer         user_data);
+
+
+void
+on_afficher_profile_espace_kine_clicked
+                                        (GtkWidget       *objet_graphique,
+                                        gpointer         user_data);
+
+
+void
+on_ajouter_seance_espace_kine_clicked  (GtkWidget       *objet_graphique,
+                                        gpointer         user_data);
+
+
+void
+on_retour_espace_kine_clicked           (GtkWidget       *objet_graphique2,
+                                        gpointer         user_data);

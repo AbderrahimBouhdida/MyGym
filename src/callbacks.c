@@ -8,7 +8,7 @@
 #include "interface.h"
 #include "support.h"
 #include "func.h"
-
+#include "kine.h"
 
 void
 on_login_clicked                       (GtkWidget       *graphic,
@@ -60,9 +60,9 @@ on_login_clicked                       (GtkWidget       *graphic,
 			gtk_widget_hide(current);*/
 			break;
 		case 5 :
-			/*kine = create_kine();
+			kine = create_kine();
 			gtk_widget_show(kine);
-			gtk_widget_hide(current);*/
+			gtk_widget_hide(current);
 			break;
 		case 6 :
 			/*medecin = create_medecin();
@@ -423,5 +423,99 @@ on_mod_st_btn_clicked                  (GtkWidget       *graphic,
 	moduser(cin,name,prenom,login,pass,tel,email);
 	current = lookup_widget(graphic,"mod_st");
 	gtk_widget_hide(current);
+}
+
+void
+on_ajouter_rdv_kine_clicked            (GtkWidget       *objet_graphique,
+                                        gpointer         user_data)
+{
+GtkWidget *a,*b,*c,*ajouter_seance_kine,*sceance_kine,*List_view;
+	char nom[20],prenom[20],rdv[20];
+	sceance_kine = create_sceance_kine();
+	ajouter_seance_kine = lookup_widget(objet_graphique,"ajouter_seance_kine");
+	a=lookup_widget(objet_graphique,"entry3");
+	b=lookup_widget(objet_graphique,"entry4");
+	c=lookup_widget(objet_graphique,"entry5");
+	strcpy(nom,gtk_entry_get_text(GTK_ENTRY(a)));
+	strcpy(prenom,gtk_entry_get_text(GTK_ENTRY(b)));
+	strcpy(rdv,gtk_entry_get_text(GTK_ENTRY(c)));
+	ajouter_kine(nom,prenom,rdv);
+	List_view=lookup_widget(sceance_kine,"treeview1");
+	afficher_kine(List_view);
+	gtk_widget_show(sceance_kine);
+	gtk_widget_hide(ajouter_seance_kine);
+	
+}
+
+void
+on_retour_profil_kine_clicked          (GtkWidget       *objet_graphique,
+                                        gpointer         user_data)
+{
+GtkWidget *kine,*profile_kine;
+kine=create_kine();
+gtk_widget_show (kine);
+profile_kine=lookup_widget(objet_graphique,"profile_kine");
+gtk_widget_hide(profile_kine);
+}
+
+void
+on_ajouter_seance_kine_clicked         (GtkWidget      *objet_graphique,
+                                        gpointer         user_data)
+{
+GtkWidget *sceance_kine,*ajouter_sceance_kine;
+sceance_kine=lookup_widget(objet_graphique,"sceance_kine");
+ajouter_sceance_kine=create_ajouter_seance_kine();
+gtk_widget_show(ajouter_sceance_kine);
+gtk_widget_hide(sceance_kine);
+}
+
+void
+on_retour_seance_kine_clicked          (GtkWidget       *objet_graphique,
+                                        gpointer         user_data)
+{
+GtkWidget *kine,*sceance_kine;
+kine=create_kine();
+gtk_widget_show (kine);
+sceance_kine=lookup_widget(objet_graphique,"sceance_kine");
+gtk_widget_hide(sceance_kine);
+}
+
+
+void
+on_afficher_profile_espace_kine_clicked
+                                        (GtkWidget       *objet_graphique,
+                                        gpointer         user_data)
+{
+GtkWidget *kine,*profile_kine;
+profile_kine=create_profile_kine();
+gtk_widget_show (profile_kine);
+kine=lookup_widget(objet_graphique,"kine");
+gtk_widget_hide(kine);
+}
+
+
+void
+on_ajouter_seance_espace_kine_clicked  (GtkWidget       *objet_graphique,
+                                        gpointer         user_data)
+{
+GtkWidget *sceance_kine,*kine,*List_view;
+sceance_kine=create_sceance_kine();
+kine=lookup_widget(objet_graphique, "kine");
+gtk_widget_hide(kine);
+List_view=lookup_widget(sceance_kine,"treeview1");
+afficher_kine(List_view);
+gtk_widget_show(sceance_kine);
+}
+
+
+void
+on_retour_espace_kine_clicked           (GtkWidget       *objet_graphique2,
+                                        gpointer         user_data)
+{
+	GtkWidget *MyWindow,*kine;
+	kine=lookup_widget(objet_graphique2,"kine");
+	MyWindow=create_MyWindow();
+	gtk_widget_show(MyWindow);
+	gtk_widget_hide(kine);
 }
 
