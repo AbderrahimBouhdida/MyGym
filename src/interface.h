@@ -14,3 +14,4 @@ GtkWidget* create_kine (void);
 GtkWidget* create_sceance_kine (void);
 GtkWidget* create_profile_kine (void);
 GtkWidget* create_ajouter_seance_kine (void);
+GtkWidget* create_modifier_seance_kine (void);

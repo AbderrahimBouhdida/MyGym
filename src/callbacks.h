@@ -122,3 +122,16 @@ on_ajouter_seance_espace_kine_clicked  (GtkWidget       *objet_graphique,
 void
 on_retour_espace_kine_clicked           (GtkWidget       *objet_graphique2,
                                         gpointer         user_data);
+void
+on_treeview1_row_activated_kine_seance (GtkTreeView     *treeview,
+                                        GtkTreePath     *path,
+                                        GtkTreeViewColumn *column,
+                                        gpointer         user_data);
+
+void
+on_retour_modifier_clicked             (GtkWidget       *graphic,
+                                        gpointer         user_data);
+
+void
+on_modifier_sceance_kine_clicked       (GtkWidget       *graphic,
+                                        gpointer         user_data);

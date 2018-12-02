@@ -1150,6 +1150,9 @@ create_sceance_kine (void)
   gtk_fixed_put (GTK_FIXED (fixed3), button8, 416, 248);
   gtk_widget_set_size_request (button8, 68, 29);
 
+  g_signal_connect ((gpointer) treeview1, "row_activated",
+                    G_CALLBACK (on_treeview1_row_activated_kine_seance),
+                    NULL);
   g_signal_connect ((gpointer) button7, "clicked",
                     G_CALLBACK (on_ajouter_seance_kine_clicked),
                     NULL);
@@ -1376,3 +1379,89 @@ create_ajouter_seance_kine (void)
   return ajouter_seance_kine;
 }
 
+GtkWidget*
+create_modifier_seance_kine (void)
+{
+  GtkWidget *modifier_seance_kine;
+  GtkWidget *fixed6;
+  GtkWidget *label16;
+  GtkWidget *label17;
+  GtkWidget *label18;
+  GtkWidget *entry8;
+  GtkWidget *entry9;
+  GtkWidget *entry10;
+  GtkWidget *retour_modifier_kine;
+  GtkWidget *modifier_sceance;
+
+  modifier_seance_kine = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+  gtk_widget_set_size_request (modifier_seance_kine, 363, 62);
+  gtk_window_set_title (GTK_WINDOW (modifier_seance_kine), _("window2"));
+
+  fixed6 = gtk_fixed_new ();
+  gtk_widget_show (fixed6);
+  gtk_container_add (GTK_CONTAINER (modifier_seance_kine), fixed6);
+
+  label16 = gtk_label_new (_("Nom :"));
+  gtk_widget_show (label16);
+  gtk_fixed_put (GTK_FIXED (fixed6), label16, 64, 104);
+  gtk_widget_set_size_request (label16, 49, 17);
+
+  label17 = gtk_label_new (_("Prenom :"));
+  gtk_widget_show (label17);
+  gtk_fixed_put (GTK_FIXED (fixed6), label17, 56, 152);
+  gtk_widget_set_size_request (label17, 88, 17);
+
+  label18 = gtk_label_new (_("sceance :"));
+  gtk_widget_show (label18);
+  gtk_fixed_put (GTK_FIXED (fixed6), label18, 64, 200);
+  gtk_widget_set_size_request (label18, 80, 17);
+
+  entry8 = gtk_entry_new ();
+  gtk_widget_show (entry8);
+  gtk_fixed_put (GTK_FIXED (fixed6), entry8, 144, 96);
+  gtk_widget_set_size_request (entry8, 160, 27);
+  gtk_entry_set_invisible_char (GTK_ENTRY (entry8), 8226);
+
+  entry9 = gtk_entry_new ();
+  gtk_widget_show (entry9);
+  gtk_fixed_put (GTK_FIXED (fixed6), entry9, 144, 144);
+  gtk_widget_set_size_request (entry9, 160, 27);
+  gtk_entry_set_invisible_char (GTK_ENTRY (entry9), 8226);
+
+  entry10 = gtk_entry_new ();
+  gtk_widget_show (entry10);
+  gtk_fixed_put (GTK_FIXED (fixed6), entry10, 144, 192);
+  gtk_widget_set_size_request (entry10, 160, 27);
+  gtk_entry_set_invisible_char (GTK_ENTRY (entry10), 8226);
+
+  retour_modifier_kine = gtk_button_new_with_mnemonic (_("Retour"));
+  gtk_widget_show (retour_modifier_kine);
+  gtk_fixed_put (GTK_FIXED (fixed6), retour_modifier_kine, 400, 272);
+  gtk_widget_set_size_request (retour_modifier_kine, 76, 29);
+
+  modifier_sceance = gtk_button_new_with_mnemonic (_("Modifier "));
+  gtk_widget_show (modifier_sceance);
+  gtk_fixed_put (GTK_FIXED (fixed6), modifier_sceance, 296, 272);
+  gtk_widget_set_size_request (modifier_sceance, 76, 29);
+
+  g_signal_connect ((gpointer) retour_modifier_kine, "clicked",
+                    G_CALLBACK (on_retour_modifier_clicked),
+                    NULL);
+  g_signal_connect ((gpointer) modifier_sceance, "clicked",
+                    G_CALLBACK (on_modifier_sceance_kine_clicked),
+                    NULL);
+
+  /* Store pointers to all widgets, for use by lookup_widget(). */
+  GLADE_HOOKUP_OBJECT_NO_REF (modifier_seance_kine, modifier_seance_kine, "modifier_seance_kine");
+  GLADE_HOOKUP_OBJECT (modifier_seance_kine, fixed6, "fixed6");
+  GLADE_HOOKUP_OBJECT (modifier_seance_kine, label16, "label16");
+  GLADE_HOOKUP_OBJECT (modifier_seance_kine, label17, "label17");
+  GLADE_HOOKUP_OBJECT (modifier_seance_kine, label18, "label18");
+  GLADE_HOOKUP_OBJECT (modifier_seance_kine, entry8, "entry8");
+  GLADE_HOOKUP_OBJECT (modifier_seance_kine, entry9, "entry9");
+  GLADE_HOOKUP_OBJECT (modifier_seance_kine, entry10, "entry10");
+  GLADE_HOOKUP_OBJECT (modifier_seance_kine, retour_modifier_kine, "retour_modifier_kine");
+  GLADE_HOOKUP_OBJECT (modifier_seance_kine, modifier_sceance, "modifier_sceance");
+
+  return modifier_seance_kine;
+}

@@ -518,4 +518,66 @@ on_retour_espace_kine_clicked           (GtkWidget       *objet_graphique2,
 	gtk_widget_show(MyWindow);
 	gtk_widget_hide(kine);
 }
+void
+on_treeview1_row_activated_kine_seance (GtkTreeView     *treeview,
+                                        GtkTreePath     *path,
+                                        GtkTreeViewColumn *column,
+                                        gpointer         user_data)
+{
+	GtkWidget *modifier_seance_kine,*nomkine,*prenomkine,*seancekine;
+	gchar *nom , *prenom , *seance;
+	modifier_seance_kine=create_modifier_seance_kine();
+	nomkine=lookup_widget(modifier_seance_kine,"entry8");
+	prenomkine=lookup_widget(modifier_seance_kine,"entry9");
+	seancekine=lookup_widget(modifier_seance_kine,"entry10");
+	GtkTreeIter iter;
+	GtkTreeModel *model=gtk_tree_view_get_model (treeview);
+	gtk_tree_model_get_iter(model,&iter,path);
+	gtk_tree_model_get (model,&iter,0,&nom,1,&prenom,2,&seance,-1);
+	printf("%s %s %s ",nom,prenom,seance);
+	gtk_entry_set_text (GTK_ENTRY (nomkine),_(nom));
+	gtk_entry_set_text (GTK_ENTRY (prenomkine),_(prenom));
+	gtk_entry_set_text (GTK_ENTRY (seancekine),_(seance));
+	gtk_widget_show(modifier_seance_kine);
+	
+}
 
+
+void
+on_modifier_sceance_clicked            (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
+
+void
+on_retour_modifier_clicked             (GtkWidget       *graphic,
+                                        gpointer         user_data)
+{
+	GtkWidget *sceance_kine,*modifier_seance_kine,*List_view;
+	modifier_seance_kine=lookup_widget(graphic,"modifier_seance_kine");
+	//sceance_kine=create_sceance_kine();
+	gtk_widget_hide(modifier_seance_kine);
+	/*List_view=lookup_widget(sceance_kine,"treeview1");
+	afficher_kine(List_view);
+	gtk_widget_show(sceance_kine);*/
+}
+
+
+void
+on_modifier_sceance_kine_clicked       (GtkWidget       *graphic,
+                                        gpointer         user_data)
+{
+	GtkWidget *current ,*nomk, *prenomk, *seancek;
+	char nom[20],prenom[20],seance[20];
+	nomk=lookup_widget(graphic,"entry8");
+	prenomk=lookup_widget(graphic,"entry9");
+	seancek=lookup_widget(graphic,"entry10");
+	strcpy(nom,gtk_entry_get_text(GTK_ENTRY(nomk)));
+	strcpy(prenom,gtk_entry_get_text(GTK_ENTRY(prenomk)));
+	strcpy(seance,gtk_entry_get_text(GTK_ENTRY(seancek)));
+	modifier_seance_kine(nom,prenom,seance);
+	current=lookup_widget(graphic,"modifier_seance_kine");
+	gtk_widget_hide(current);
+}
