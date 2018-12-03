@@ -135,3 +135,59 @@ on_retour_modifier_clicked             (GtkWidget       *graphic,
 void
 on_modifier_sceance_kine_clicked       (GtkWidget       *graphic,
                                         gpointer         user_data);
+
+//coach 
+void
+on_bcoach_profil_clicked               (GtkWidget       *objet_graphique,
+                                        gpointer         user_data);
+
+void
+on_bcoach_dispo_clicked                (GtkWidget       *objet_graphique,
+                                        gpointer         user_data);
+
+void
+on_bcoach_retour_clicked               (GtkWidget       *objet_graphique,
+                                        gpointer         user_data);
+
+void
+on_bcoach_seance_clicked               (GtkWidget       *objet_graphique,
+                                        gpointer         user_data);
+
+void
+on_button1_clicked                     (GtkWidget       *objet_graphique,
+                                        gpointer         user_data);
+
+void
+on_bAjout_clicked                      (GtkWidget      *objet_graphique,
+                                        gpointer         user_data);
+
+void
+on_c_ajout_clicked                     (GtkWidget      *objet_graphique,
+                                        gpointer         user_data);
+
+void
+on_c_retour_clicked                    (GtkWidget       *objet_graphique,
+                                        gpointer         user_data);
+
+void
+on_coach_bretour_clicked               (GtkWidget      *objet_graphique,
+                                        gpointer         user_data);
+
+void
+on_coach_butmodifier_clicked           (GtkWidget      *graphic,
+                                        gpointer         user_data);
+
+void
+on_buttretour_modi_coach_clicked       (GtkWidget       *graphic,
+                                        gpointer         user_data);
+
+void
+on_treeview3_row_activated             (GtkTreeView     *treeview,
+                                        GtkTreePath     *path,
+                                        GtkTreeViewColumn *column,
+                                        gpointer         user_data);
+
+void
+on_coach_seanceretour_clicked          (GtkWidget      *graphic,
+                                        gpointer         user_data);
+

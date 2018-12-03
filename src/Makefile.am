@@ -13,7 +13,8 @@ login_SOURCES = \
 	interface.c interface.h \
 	callbacks.c callbacks.h \
 	func.c func.h \
-	kine.c kine.h
+	kine.c kine.h \
+	coach.c coach.h
 
 login_LDADD = @PACKAGE_LIBS@ $(INTLLIBS)
 

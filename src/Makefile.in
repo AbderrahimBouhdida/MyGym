@@ -101,7 +101,7 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_login_OBJECTS = main.$(OBJEXT) support.$(OBJEXT) \
 	interface.$(OBJEXT) callbacks.$(OBJEXT) func.$(OBJEXT) \
-	kine.$(OBJEXT)
+	kine.$(OBJEXT) coach.$(OBJEXT)
 login_OBJECTS = $(am_login_OBJECTS)
 am__DEPENDENCIES_1 =
 login_DEPENDENCIES = $(am__DEPENDENCIES_1)
@@ -283,7 +283,8 @@ login_SOURCES = \
 	interface.c interface.h \
 	callbacks.c callbacks.h \
 	func.c func.h \
-	kine.c kine.h
+	kine.c kine.h \
+	coach.c coach.h
 
 login_LDADD = @PACKAGE_LIBS@ $(INTLLIBS)
 all: all-am
@@ -373,6 +374,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/callbacks.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/coach.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/func.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/interface.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/kine.Po@am__quote@

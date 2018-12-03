@@ -15,3 +15,8 @@ GtkWidget* create_sceance_kine (void);
 GtkWidget* create_profile_kine (void);
 GtkWidget* create_ajouter_seance_kine (void);
 GtkWidget* create_modifier_seance_kine (void);
+GtkWidget* create_coach (void);
+GtkWidget* create_coach_seance (void);
+GtkWidget* create_coach_ajout (void);
+GtkWidget* create_coach_profil (void);
+GtkWidget* create_modifier_coach (void);

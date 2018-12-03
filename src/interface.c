@@ -1465,3 +1465,535 @@ create_modifier_seance_kine (void)
 
   return modifier_seance_kine;
 }
+//coach
+
+GtkWidget*
+create_coach (void)
+{
+  GtkWidget *coach;
+  GtkWidget *fixed8;
+  GtkWidget *fixed9;
+  GtkWidget *lcoach_bienv;
+  GtkWidget *bcoach_profil;
+  GtkWidget *bcoach_seance;
+  GtkWidget *bcoach_retour;
+  GtkWidget *alignment1;
+  GtkWidget *hbox1;
+  GtkWidget *image1;
+  GtkWidget *label27;
+
+  coach = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+  gtk_window_set_title (GTK_WINDOW (coach), _("coach"));
+
+  fixed8 = gtk_fixed_new ();
+  gtk_widget_show (fixed8);
+  gtk_container_add (GTK_CONTAINER (coach), fixed8);
+
+  fixed9 = gtk_fixed_new ();
+  gtk_widget_show (fixed9);
+  gtk_fixed_put (GTK_FIXED (fixed8), fixed9, 320, 48);
+  gtk_widget_set_size_request (fixed9, 50, 50);
+
+  lcoach_bienv = gtk_label_new (_("Bienvenue dans l'espace des coachs"));
+  gtk_widget_show (lcoach_bienv);
+  gtk_fixed_put (GTK_FIXED (fixed8), lcoach_bienv, 64, 8);
+  gtk_widget_set_size_request (lcoach_bienv, 288, 16);
+
+  bcoach_profil = gtk_button_new_with_mnemonic (_("Profil"));
+  gtk_widget_show (bcoach_profil);
+  gtk_fixed_put (GTK_FIXED (fixed8), bcoach_profil, 248, 40);
+  gtk_widget_set_size_request (bcoach_profil, 116, 45);
+
+  bcoach_seance = gtk_button_new_with_mnemonic (_("S\303\251ances\nd'entrainements"));
+  gtk_widget_show (bcoach_seance);
+  gtk_fixed_put (GTK_FIXED (fixed8), bcoach_seance, 248, 88);
+  gtk_widget_set_size_request (bcoach_seance, 112, 64);
+
+  bcoach_retour = gtk_button_new ();
+  gtk_widget_show (bcoach_retour);
+  gtk_fixed_put (GTK_FIXED (fixed8), bcoach_retour, 296, 248);
+  gtk_widget_set_size_request (bcoach_retour, 68, 29);
+
+  alignment1 = gtk_alignment_new (0.5, 0.5, 0, 0);
+  gtk_widget_show (alignment1);
+  gtk_container_add (GTK_CONTAINER (bcoach_retour), alignment1);
+
+  hbox1 = gtk_hbox_new (FALSE, 2);
+  gtk_widget_show (hbox1);
+  gtk_container_add (GTK_CONTAINER (alignment1), hbox1);
+
+  image1 = gtk_image_new_from_stock ("gtk-go-back", GTK_ICON_SIZE_BUTTON);
+  gtk_widget_show (image1);
+  gtk_box_pack_start (GTK_BOX (hbox1), image1, FALSE, FALSE, 0);
+
+  label27 = gtk_label_new_with_mnemonic (_("Retour"));
+  gtk_widget_show (label27);
+  gtk_box_pack_start (GTK_BOX (hbox1), label27, FALSE, FALSE, 0);
+
+  g_signal_connect ((gpointer) bcoach_profil, "clicked",
+                    G_CALLBACK (on_bcoach_profil_clicked),
+                    NULL);
+  g_signal_connect ((gpointer) bcoach_seance, "clicked",
+                    G_CALLBACK (on_bcoach_seance_clicked),
+                    NULL);
+  g_signal_connect ((gpointer) bcoach_retour, "clicked",
+                    G_CALLBACK (on_bcoach_retour_clicked),
+                    NULL);
+
+  /* Store pointers to all widgets, for use by lookup_widget(). */
+  GLADE_HOOKUP_OBJECT_NO_REF (coach, coach, "coach");
+  GLADE_HOOKUP_OBJECT (coach, fixed8, "fixed8");
+  GLADE_HOOKUP_OBJECT (coach, fixed9, "fixed9");
+  GLADE_HOOKUP_OBJECT (coach, lcoach_bienv, "lcoach_bienv");
+  GLADE_HOOKUP_OBJECT (coach, bcoach_profil, "bcoach_profil");
+  GLADE_HOOKUP_OBJECT (coach, bcoach_seance, "bcoach_seance");
+  GLADE_HOOKUP_OBJECT (coach, bcoach_retour, "bcoach_retour");
+  GLADE_HOOKUP_OBJECT (coach, alignment1, "alignment1");
+  GLADE_HOOKUP_OBJECT (coach, hbox1, "hbox1");
+  GLADE_HOOKUP_OBJECT (coach, image1, "image1");
+  GLADE_HOOKUP_OBJECT (coach, label27, "label27");
+
+  return coach;
+}
+
+GtkWidget*
+create_coach_seance (void)
+{
+  GtkWidget *coach_seance;
+  GtkWidget *fixed10;
+  GtkWidget *scrolledwindow3;
+  GtkWidget *treeview3;
+  GtkWidget *bcoa_Ajout;
+  GtkWidget *alignment2;
+  GtkWidget *hbox2;
+  GtkWidget *image2;
+  GtkWidget *label28;
+  GtkWidget *coach_seanceretour;
+  GtkWidget *alignment3;
+  GtkWidget *hbox3;
+  GtkWidget *image3;
+  GtkWidget *label29;
+
+  coach_seance = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+  gtk_window_set_title (GTK_WINDOW (coach_seance), _("coach_seance"));
+
+  fixed10 = gtk_fixed_new ();
+  gtk_widget_show (fixed10);
+  gtk_container_add (GTK_CONTAINER (coach_seance), fixed10);
+
+  scrolledwindow3 = gtk_scrolled_window_new (NULL, NULL);
+  gtk_widget_show (scrolledwindow3);
+  gtk_fixed_put (GTK_FIXED (fixed10), scrolledwindow3, 232, 256);
+  gtk_widget_set_size_request (scrolledwindow3, 500, 800);
+
+  treeview3 = gtk_tree_view_new ();
+  gtk_widget_show (treeview3);
+  gtk_container_add (GTK_CONTAINER (scrolledwindow3), treeview3);
+
+  bcoa_Ajout = gtk_button_new ();
+  gtk_widget_show (bcoa_Ajout);
+  gtk_fixed_put (GTK_FIXED (fixed10), bcoa_Ajout, 248, 24);
+  gtk_widget_set_size_request (bcoa_Ajout, 144, 56);
+
+  alignment2 = gtk_alignment_new (0.5, 0.5, 0, 0);
+  gtk_widget_show (alignment2);
+  gtk_container_add (GTK_CONTAINER (bcoa_Ajout), alignment2);
+
+  hbox2 = gtk_hbox_new (FALSE, 2);
+  gtk_widget_show (hbox2);
+  gtk_container_add (GTK_CONTAINER (alignment2), hbox2);
+
+  image2 = gtk_image_new_from_stock ("gtk-add", GTK_ICON_SIZE_BUTTON);
+  gtk_widget_show (image2);
+  gtk_box_pack_start (GTK_BOX (hbox2), image2, FALSE, FALSE, 0);
+
+  label28 = gtk_label_new_with_mnemonic (_("Ajouter"));
+  gtk_widget_show (label28);
+  gtk_box_pack_start (GTK_BOX (hbox2), label28, FALSE, FALSE, 0);
+
+  coach_seanceretour = gtk_button_new ();
+  gtk_widget_show (coach_seanceretour);
+  gtk_fixed_put (GTK_FIXED (fixed10), coach_seanceretour, 424, 24);
+  gtk_widget_set_size_request (coach_seanceretour, 160, 56);
+
+  alignment3 = gtk_alignment_new (0.5, 0.5, 0, 0);
+  gtk_widget_show (alignment3);
+  gtk_container_add (GTK_CONTAINER (coach_seanceretour), alignment3);
+
+  hbox3 = gtk_hbox_new (FALSE, 2);
+  gtk_widget_show (hbox3);
+  gtk_container_add (GTK_CONTAINER (alignment3), hbox3);
+
+  image3 = gtk_image_new_from_stock ("gtk-go-back", GTK_ICON_SIZE_BUTTON);
+  gtk_widget_show (image3);
+  gtk_box_pack_start (GTK_BOX (hbox3), image3, FALSE, FALSE, 0);
+
+  label29 = gtk_label_new_with_mnemonic (_("Retour"));
+  gtk_widget_show (label29);
+  gtk_box_pack_start (GTK_BOX (hbox3), label29, FALSE, FALSE, 0);
+
+  g_signal_connect ((gpointer) treeview3, "row_activated",
+                    G_CALLBACK (on_treeview3_row_activated),
+                    NULL);
+  g_signal_connect ((gpointer) bcoa_Ajout, "clicked",
+                    G_CALLBACK (on_bAjout_clicked),
+                    NULL);
+  g_signal_connect ((gpointer) coach_seanceretour, "clicked",
+                    G_CALLBACK (on_coach_seanceretour_clicked),
+                    NULL);
+
+  /* Store pointers to all widgets, for use by lookup_widget(). */
+  GLADE_HOOKUP_OBJECT_NO_REF (coach_seance, coach_seance, "coach_seance");
+  GLADE_HOOKUP_OBJECT (coach_seance, fixed10, "fixed10");
+  GLADE_HOOKUP_OBJECT (coach_seance, scrolledwindow3, "scrolledwindow3");
+  GLADE_HOOKUP_OBJECT (coach_seance, treeview3, "treeview3");
+  GLADE_HOOKUP_OBJECT (coach_seance, bcoa_Ajout, "bcoa_Ajout");
+  GLADE_HOOKUP_OBJECT (coach_seance, alignment2, "alignment2");
+  GLADE_HOOKUP_OBJECT (coach_seance, hbox2, "hbox2");
+  GLADE_HOOKUP_OBJECT (coach_seance, image2, "image2");
+  GLADE_HOOKUP_OBJECT (coach_seance, label28, "label28");
+  GLADE_HOOKUP_OBJECT (coach_seance, coach_seanceretour, "coach_seanceretour");
+  GLADE_HOOKUP_OBJECT (coach_seance, alignment3, "alignment3");
+  GLADE_HOOKUP_OBJECT (coach_seance, hbox3, "hbox3");
+  GLADE_HOOKUP_OBJECT (coach_seance, image3, "image3");
+  GLADE_HOOKUP_OBJECT (coach_seance, label29, "label29");
+
+  return coach_seance;
+}
+
+GtkWidget*
+create_coach_ajout (void)
+{
+  GtkWidget *coach_ajout;
+  GtkWidget *fixed11;
+  GtkWidget *coach_type;
+  GtkWidget *coach_seance;
+  GtkWidget *coach_date;
+  GtkWidget *c_entry1;
+  GtkWidget *c_entry2;
+  GtkWidget *c_entry3;
+  GtkWidget *c_ajout;
+  GtkWidget *alignment4;
+  GtkWidget *hbox4;
+  GtkWidget *image4;
+  GtkWidget *label30;
+  GtkWidget *c_retour;
+  GtkWidget *alignment5;
+  GtkWidget *hbox5;
+  GtkWidget *image5;
+  GtkWidget *label31;
+
+  coach_ajout = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+  gtk_window_set_title (GTK_WINDOW (coach_ajout), _("coach_ajout"));
+
+  fixed11 = gtk_fixed_new ();
+  gtk_widget_show (fixed11);
+  gtk_container_add (GTK_CONTAINER (coach_ajout), fixed11);
+
+  coach_type = gtk_label_new (_("Type"));
+  gtk_widget_show (coach_type);
+  gtk_fixed_put (GTK_FIXED (fixed11), coach_type, 24, 112);
+  gtk_widget_set_size_request (coach_type, 49, 17);
+
+  coach_seance = gtk_label_new (_("S\303\251ance"));
+  gtk_widget_show (coach_seance);
+  gtk_fixed_put (GTK_FIXED (fixed11), coach_seance, 24, 32);
+  gtk_widget_set_size_request (coach_seance, 64, 17);
+
+  coach_date = gtk_label_new (_("Date"));
+  gtk_widget_show (coach_date);
+  gtk_fixed_put (GTK_FIXED (fixed11), coach_date, 8, 72);
+  gtk_widget_set_size_request (coach_date, 80, 17);
+
+  c_entry1 = gtk_entry_new ();
+  gtk_widget_show (c_entry1);
+  gtk_fixed_put (GTK_FIXED (fixed11), c_entry1, 96, 32);
+  gtk_widget_set_size_request (c_entry1, 160, 27);
+  gtk_entry_set_invisible_char (GTK_ENTRY (c_entry1), 8226);
+
+  c_entry2 = gtk_entry_new ();
+  gtk_widget_show (c_entry2);
+  gtk_fixed_put (GTK_FIXED (fixed11), c_entry2, 104, 72);
+  gtk_widget_set_size_request (c_entry2, 160, 27);
+  gtk_entry_set_invisible_char (GTK_ENTRY (c_entry2), 8226);
+
+  c_entry3 = gtk_entry_new ();
+  gtk_widget_show (c_entry3);
+  gtk_fixed_put (GTK_FIXED (fixed11), c_entry3, 104, 112);
+  gtk_widget_set_size_request (c_entry3, 160, 27);
+  gtk_entry_set_invisible_char (GTK_ENTRY (c_entry3), 8226);
+
+  c_ajout = gtk_button_new ();
+  gtk_widget_show (c_ajout);
+  gtk_fixed_put (GTK_FIXED (fixed11), c_ajout, 80, 208);
+  gtk_widget_set_size_request (c_ajout, 96, 32);
+
+  alignment4 = gtk_alignment_new (0.5, 0.5, 0, 0);
+  gtk_widget_show (alignment4);
+  gtk_container_add (GTK_CONTAINER (c_ajout), alignment4);
+
+  hbox4 = gtk_hbox_new (FALSE, 2);
+  gtk_widget_show (hbox4);
+  gtk_container_add (GTK_CONTAINER (alignment4), hbox4);
+
+  image4 = gtk_image_new_from_stock ("gtk-add", GTK_ICON_SIZE_BUTTON);
+  gtk_widget_show (image4);
+  gtk_box_pack_start (GTK_BOX (hbox4), image4, FALSE, FALSE, 0);
+
+  label30 = gtk_label_new_with_mnemonic (_("Ajouter"));
+  gtk_widget_show (label30);
+  gtk_box_pack_start (GTK_BOX (hbox4), label30, FALSE, FALSE, 0);
+
+  c_retour = gtk_button_new ();
+  gtk_widget_show (c_retour);
+  gtk_fixed_put (GTK_FIXED (fixed11), c_retour, 224, 208);
+  gtk_widget_set_size_request (c_retour, 88, 29);
+
+  alignment5 = gtk_alignment_new (0.5, 0.5, 0, 0);
+  gtk_widget_show (alignment5);
+  gtk_container_add (GTK_CONTAINER (c_retour), alignment5);
+
+  hbox5 = gtk_hbox_new (FALSE, 2);
+  gtk_widget_show (hbox5);
+  gtk_container_add (GTK_CONTAINER (alignment5), hbox5);
+
+  image5 = gtk_image_new_from_stock ("gtk-go-back", GTK_ICON_SIZE_BUTTON);
+  gtk_widget_show (image5);
+  gtk_box_pack_start (GTK_BOX (hbox5), image5, FALSE, FALSE, 0);
+
+  label31 = gtk_label_new_with_mnemonic (_("Retour"));
+  gtk_widget_show (label31);
+  gtk_box_pack_start (GTK_BOX (hbox5), label31, FALSE, FALSE, 0);
+
+  g_signal_connect ((gpointer) c_ajout, "clicked",
+                    G_CALLBACK (on_c_ajout_clicked),
+                    NULL);
+  g_signal_connect ((gpointer) c_retour, "clicked",
+                    G_CALLBACK (on_c_retour_clicked),
+                    NULL);
+
+  /* Store pointers to all widgets, for use by lookup_widget(). */
+  GLADE_HOOKUP_OBJECT_NO_REF (coach_ajout, coach_ajout, "coach_ajout");
+  GLADE_HOOKUP_OBJECT (coach_ajout, fixed11, "fixed11");
+  GLADE_HOOKUP_OBJECT (coach_ajout, coach_type, "coach_type");
+  GLADE_HOOKUP_OBJECT (coach_ajout, coach_seance, "coach_seance");
+  GLADE_HOOKUP_OBJECT (coach_ajout, coach_date, "coach_date");
+  GLADE_HOOKUP_OBJECT (coach_ajout, c_entry1, "c_entry1");
+  GLADE_HOOKUP_OBJECT (coach_ajout, c_entry2, "c_entry2");
+  GLADE_HOOKUP_OBJECT (coach_ajout, c_entry3, "c_entry3");
+  GLADE_HOOKUP_OBJECT (coach_ajout, c_ajout, "c_ajout");
+  GLADE_HOOKUP_OBJECT (coach_ajout, alignment4, "alignment4");
+  GLADE_HOOKUP_OBJECT (coach_ajout, hbox4, "hbox4");
+  GLADE_HOOKUP_OBJECT (coach_ajout, image4, "image4");
+  GLADE_HOOKUP_OBJECT (coach_ajout, label30, "label30");
+  GLADE_HOOKUP_OBJECT (coach_ajout, c_retour, "c_retour");
+  GLADE_HOOKUP_OBJECT (coach_ajout, alignment5, "alignment5");
+  GLADE_HOOKUP_OBJECT (coach_ajout, hbox5, "hbox5");
+  GLADE_HOOKUP_OBJECT (coach_ajout, image5, "image5");
+  GLADE_HOOKUP_OBJECT (coach_ajout, label31, "label31");
+
+  return coach_ajout;
+}
+
+GtkWidget*
+create_coach_profil (void)
+{
+  GtkWidget *coach_profil;
+  GtkWidget *fixed12;
+  GtkWidget *scrolledwindow4;
+  GtkWidget *treeview4;
+  GtkWidget *coach_bretour;
+  GtkWidget *alignment7;
+  GtkWidget *hbox7;
+  GtkWidget *image7;
+  GtkWidget *label33;
+
+  coach_profil = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+  gtk_window_set_title (GTK_WINDOW (coach_profil), _("coach_profil"));
+
+  fixed12 = gtk_fixed_new ();
+  gtk_widget_show (fixed12);
+  gtk_container_add (GTK_CONTAINER (coach_profil), fixed12);
+
+  scrolledwindow4 = gtk_scrolled_window_new (NULL, NULL);
+  gtk_widget_show (scrolledwindow4);
+  gtk_fixed_put (GTK_FIXED (fixed12), scrolledwindow4, 296, 272);
+  gtk_widget_set_size_request (scrolledwindow4, 400, 600);
+
+  treeview4 = gtk_tree_view_new ();
+  gtk_widget_show (treeview4);
+  gtk_container_add (GTK_CONTAINER (scrolledwindow4), treeview4);
+
+  coach_bretour = gtk_button_new ();
+  gtk_widget_show (coach_bretour);
+  gtk_fixed_put (GTK_FIXED (fixed12), coach_bretour, 376, 40);
+  gtk_widget_set_size_request (coach_bretour, 136, 48);
+
+  alignment7 = gtk_alignment_new (0.5, 0.5, 0, 0);
+  gtk_widget_show (alignment7);
+  gtk_container_add (GTK_CONTAINER (coach_bretour), alignment7);
+
+  hbox7 = gtk_hbox_new (FALSE, 2);
+  gtk_widget_show (hbox7);
+  gtk_container_add (GTK_CONTAINER (alignment7), hbox7);
+
+  image7 = gtk_image_new_from_stock ("gtk-go-back", GTK_ICON_SIZE_BUTTON);
+  gtk_widget_show (image7);
+  gtk_box_pack_start (GTK_BOX (hbox7), image7, FALSE, FALSE, 0);
+
+  label33 = gtk_label_new_with_mnemonic (_("Retour"));
+  gtk_widget_show (label33);
+  gtk_box_pack_start (GTK_BOX (hbox7), label33, FALSE, FALSE, 0);
+
+  g_signal_connect ((gpointer) coach_bretour, "clicked",
+                    G_CALLBACK (on_coach_bretour_clicked),
+                    NULL);
+
+  /* Store pointers to all widgets, for use by lookup_widget(). */
+  GLADE_HOOKUP_OBJECT_NO_REF (coach_profil, coach_profil, "coach_profil");
+  GLADE_HOOKUP_OBJECT (coach_profil, fixed12, "fixed12");
+  GLADE_HOOKUP_OBJECT (coach_profil, scrolledwindow4, "scrolledwindow4");
+  GLADE_HOOKUP_OBJECT (coach_profil, treeview4, "treeview4");
+  GLADE_HOOKUP_OBJECT (coach_profil, coach_bretour, "coach_bretour");
+  GLADE_HOOKUP_OBJECT (coach_profil, alignment7, "alignment7");
+  GLADE_HOOKUP_OBJECT (coach_profil, hbox7, "hbox7");
+  GLADE_HOOKUP_OBJECT (coach_profil, image7, "image7");
+  GLADE_HOOKUP_OBJECT (coach_profil, label33, "label33");
+
+  return coach_profil;
+}
+
+GtkWidget*
+create_modifier_coach (void)
+{
+  GtkWidget *modifier_coach;
+  GtkWidget *fixed13;
+  GtkWidget *entry1;
+  GtkWidget *entry2;
+  GtkWidget *entry3;
+  GtkWidget *c_seance;
+  GtkWidget *c_date;
+  GtkWidget *c_type;
+  GtkWidget *coach_butmodifier;
+  GtkWidget *alignment8;
+  GtkWidget *hbox8;
+  GtkWidget *image8;
+  GtkWidget *label34;
+  GtkWidget *buttretour_modi_coach;
+  GtkWidget *alignment9;
+  GtkWidget *hbox9;
+  GtkWidget *image9;
+  GtkWidget *label35;
+
+  modifier_coach = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+  gtk_window_set_title (GTK_WINDOW (modifier_coach), _("modifier_coach"));
+
+  fixed13 = gtk_fixed_new ();
+  gtk_widget_show (fixed13);
+  gtk_container_add (GTK_CONTAINER (modifier_coach), fixed13);
+
+  entry1 = gtk_entry_new ();
+  gtk_widget_show (entry1);
+  gtk_fixed_put (GTK_FIXED (fixed13), entry1, 112, 16);
+  gtk_widget_set_size_request (entry1, 160, 27);
+  gtk_entry_set_invisible_char (GTK_ENTRY (entry1), 8226);
+
+  entry2 = gtk_entry_new ();
+  gtk_widget_show (entry2);
+  gtk_fixed_put (GTK_FIXED (fixed13), entry2, 80, 56);
+  gtk_widget_set_size_request (entry2, 160, 27);
+  gtk_entry_set_invisible_char (GTK_ENTRY (entry2), 8226);
+
+  entry3 = gtk_entry_new ();
+  gtk_widget_show (entry3);
+  gtk_fixed_put (GTK_FIXED (fixed13), entry3, 64, 96);
+  gtk_widget_set_size_request (entry3, 160, 27);
+  gtk_entry_set_invisible_char (GTK_ENTRY (entry3), 8226);
+
+  c_seance = gtk_label_new (_("seance:"));
+  gtk_widget_show (c_seance);
+  gtk_fixed_put (GTK_FIXED (fixed13), c_seance, 16, 16);
+  gtk_widget_set_size_request (c_seance, 80, 24);
+
+  c_date = gtk_label_new (_("date:"));
+  gtk_widget_show (c_date);
+  gtk_fixed_put (GTK_FIXED (fixed13), c_date, 0, 56);
+  gtk_widget_set_size_request (c_date, 88, 16);
+
+  c_type = gtk_label_new (_("type:"));
+  gtk_widget_show (c_type);
+  gtk_fixed_put (GTK_FIXED (fixed13), c_type, 8, 96);
+  gtk_widget_set_size_request (c_type, 56, 16);
+
+  coach_butmodifier = gtk_button_new ();
+  gtk_widget_show (coach_butmodifier);
+  gtk_fixed_put (GTK_FIXED (fixed13), coach_butmodifier, 32, 216);
+  gtk_widget_set_size_request (coach_butmodifier, 96, 29);
+
+  alignment8 = gtk_alignment_new (0.5, 0.5, 0, 0);
+  gtk_widget_show (alignment8);
+  gtk_container_add (GTK_CONTAINER (coach_butmodifier), alignment8);
+
+  hbox8 = gtk_hbox_new (FALSE, 2);
+  gtk_widget_show (hbox8);
+  gtk_container_add (GTK_CONTAINER (alignment8), hbox8);
+
+  image8 = gtk_image_new_from_stock ("gtk-refresh", GTK_ICON_SIZE_BUTTON);
+  gtk_widget_show (image8);
+  gtk_box_pack_start (GTK_BOX (hbox8), image8, FALSE, FALSE, 0);
+
+  label34 = gtk_label_new_with_mnemonic (_("Modifier"));
+  gtk_widget_show (label34);
+  gtk_box_pack_start (GTK_BOX (hbox8), label34, FALSE, FALSE, 0);
+
+  buttretour_modi_coach = gtk_button_new ();
+  gtk_widget_show (buttretour_modi_coach);
+  gtk_fixed_put (GTK_FIXED (fixed13), buttretour_modi_coach, 184, 216);
+  gtk_widget_set_size_request (buttretour_modi_coach, 100, 29);
+
+  alignment9 = gtk_alignment_new (0.5, 0.5, 0, 0);
+  gtk_widget_show (alignment9);
+  gtk_container_add (GTK_CONTAINER (buttretour_modi_coach), alignment9);
+
+  hbox9 = gtk_hbox_new (FALSE, 2);
+  gtk_widget_show (hbox9);
+  gtk_container_add (GTK_CONTAINER (alignment9), hbox9);
+
+  image9 = gtk_image_new_from_stock ("gtk-go-back", GTK_ICON_SIZE_BUTTON);
+  gtk_widget_show (image9);
+  gtk_box_pack_start (GTK_BOX (hbox9), image9, FALSE, FALSE, 0);
+
+  label35 = gtk_label_new_with_mnemonic (_("Retour"));
+  gtk_widget_show (label35);
+  gtk_box_pack_start (GTK_BOX (hbox9), label35, FALSE, FALSE, 0);
+
+  g_signal_connect ((gpointer) coach_butmodifier, "clicked",
+                    G_CALLBACK (on_coach_butmodifier_clicked),
+                    NULL);
+  g_signal_connect ((gpointer) buttretour_modi_coach, "clicked",
+                    G_CALLBACK (on_buttretour_modi_coach_clicked),
+                    NULL);
+
+  /* Store pointers to all widgets, for use by lookup_widget(). */
+  GLADE_HOOKUP_OBJECT_NO_REF (modifier_coach, modifier_coach, "modifier_coach");
+  GLADE_HOOKUP_OBJECT (modifier_coach, fixed13, "fixed13");
+  GLADE_HOOKUP_OBJECT (modifier_coach, entry1, "entry1");
+  GLADE_HOOKUP_OBJECT (modifier_coach, entry2, "entry2");
+  GLADE_HOOKUP_OBJECT (modifier_coach, entry3, "entry3");
+  GLADE_HOOKUP_OBJECT (modifier_coach, c_seance, "c_seance");
+  GLADE_HOOKUP_OBJECT (modifier_coach, c_date, "c_date");
+  GLADE_HOOKUP_OBJECT (modifier_coach, c_type, "c_type");
+  GLADE_HOOKUP_OBJECT (modifier_coach, coach_butmodifier, "coach_butmodifier");
+  GLADE_HOOKUP_OBJECT (modifier_coach, alignment8, "alignment8");
+  GLADE_HOOKUP_OBJECT (modifier_coach, hbox8, "hbox8");
+  GLADE_HOOKUP_OBJECT (modifier_coach, image8, "image8");
+  GLADE_HOOKUP_OBJECT (modifier_coach, label34, "label34");
+  GLADE_HOOKUP_OBJECT (modifier_coach, buttretour_modi_coach, "buttretour_modi_coach");
+  GLADE_HOOKUP_OBJECT (modifier_coach, alignment9, "alignment9");
+  GLADE_HOOKUP_OBJECT (modifier_coach, hbox9, "hbox9");
+  GLADE_HOOKUP_OBJECT (modifier_coach, image9, "image9");
+  GLADE_HOOKUP_OBJECT (modifier_coach, label35, "label35");
+
+  return modifier_coach;
+}
+
