@@ -4,17 +4,15 @@
 #include"func.h"
 
 int verifier(char user[], char pass[],char status[]){
-	char login[20], password[20], nom[20], prenom[20], email[20], tel[20],rolen[20],cin[20];
-	int day, month, year, role;
+	char user_f[20],pass_f[20],cin[20];
+	int role;
 	FILE *f;
-	f = fopen("src/users.txt","r");
+	f = fopen("/home/imou/Desktop/projects/mygym/login/src/users.txt","r");
 	if(f!=NULL){
-		while(fscanf(f,"%s %s %s %d %s %s %s %s %d %d %d",cin, login,password,&role,nom,prenom,email,tel,&day,&month,&year)!=EOF){
-			printf("%d \n",role);
-			if(!strcmp(user,login) && !strcmp(pass,password)){
+		while(fscanf(f,"%s %s %s %d",cin,user_f,pass_f,&role)!=EOF){
+			if(!strcmp(user,user_f) && !strcmp(pass,pass_f)){
 				strcpy(status,user);
 				fclose(f);
-				printf("in %d ",role);
 				return role;
 			}
 		}
@@ -28,7 +26,7 @@ int verifier(char user[], char pass[],char status[]){
 }
 void ajouter (char cin[],char login[],char password[],char nom[],char prenom[],char email[],char tel[],int day,int month,int year, int role){
         FILE* f;
-	f=fopen("src/users.txt","a");
+	f=fopen("/home/imou/Desktop/projects/mygym/login/src/users.txt","a");
 	if(f!=NULL){
 		 fprintf(f,"%s %s %s %d %s %s %s %s %d %d %d\n",cin,login,password,role,nom,prenom,email,tel,day,month,year);
         }
@@ -57,10 +55,9 @@ void afficher (GtkWidget *plistview, char type[20]){
 	GtkCellRenderer *celrender;
 	GtkTreeViewColumn *col;
 	GtkTreeSelection *selection;
-	
 	liststore = gtk_list_store_new(NUM_COLS, G_TYPE_BOOLEAN, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING,G_TYPE_STRING);
         FILE* f;
-        f=fopen("src/users.txt","r");
+        f=fopen("/home/imou/Desktop/projects/mygym/login/src/users.txt","r");
         if(f!=NULL){
 		while(fscanf(f,"%s %s %s %d %s %s %s %s %d %d %d",cin, login,password,&role,nom,prenom,email,tel,&day,&month,&year)!=EOF){
 			GtkTreeIter iter;
@@ -101,25 +98,32 @@ void afficher (GtkWidget *plistview, char type[20]){
 		        GtkTreeIter iter;
 		    	GtkTreePath *ppath;
 		    	gboolean boolean;
-		 
-		 
-			// convertir la chaine path en GtkTreePath 
-		 
+			gchar *cin;
+			// convertir la chaine path en GtkTreePath
+
 		     	ppath = gtk_tree_path_new_from_string (path);
-		 
-			// convertir la valeure recuperée en GtkTreeIter  
+
+			// convertir la valeure recuperée en GtkTreeIter
 		     	gtk_tree_model_get_iter (GTK_TREE_MODEL (user_data),
 								   &iter,
 								   ppath);
-			//  utiliser la variable GtkTreeIter pour acceder la valeure booleaine                           
+			//  utiliser la variable GtkTreeIter pour acceder la valeure booleaine
 		     	gtk_tree_model_get (GTK_TREE_MODEL (user_data),
 								   &iter,
 								   COL_TOGG,&boolean,
-								   -1);	
-			// changer cette valeure booleaine (! boolean )                          
+								   -1);
+			//get data
+			gtk_tree_model_get (GTK_TREE_MODEL (user_data),
+                                                                   &iter,
+                                                                   COL_CIN,&cin,
+                                                                   -1);
+
+			// changer cette valeure booleaine (! boolean )
 		     	gtk_list_store_set (user_data, &iter,
 								   COL_TOGG, !boolean,
-								   -1); 
+								   -1);
+			//delete
+			deluser(cin);
 		}
 
 		celrender = gtk_cell_renderer_toggle_new();
@@ -127,7 +131,7 @@ void afficher (GtkWidget *plistview, char type[20]){
 		gtk_tree_view_append_column(GTK_TREE_VIEW(plistview),col);
 
 		g_signal_connect(G_OBJECT(celrender), "toggled", (GCallback)toggled_func, liststore);
-		
+
 		celrender = gtk_cell_renderer_text_new();
 		col = gtk_tree_view_column_new_with_attributes("Cin",celrender,"text",COL_CIN,NULL);
 		gtk_tree_view_append_column(GTK_TREE_VIEW(plistview),col);
@@ -138,7 +142,7 @@ void afficher (GtkWidget *plistview, char type[20]){
 
 		celrender = gtk_cell_renderer_text_new();
 		col = gtk_tree_view_column_new_with_attributes("prenom",celrender,"text",COL_PREN,NULL);
-		gtk_tree_view_append_column(GTK_TREE_VIEW(plistview),col);		
+		gtk_tree_view_append_column(GTK_TREE_VIEW(plistview),col);
 
 		celrender = gtk_cell_renderer_text_new();
 		col = gtk_tree_view_column_new_with_attributes("login",celrender,"text",COL_LOGI,NULL);
@@ -201,6 +205,22 @@ void moduser(char cin[],char name[],char prenom[],char login[],char pass[],char 
 		if(!strcmp(cin,cin_o)){
 			fprintf(tmp,"%s %s %s %d %s %s %s %s %d %d %d\n",cin,login,pass,role_o,name,prenom,email,tel,day,month,year);	
 		}else
+		fprintf(tmp,"%s %s %s %d %s %s %s %s %d %d %d\n",cin_o, login_o,password_o,role_o,nom_o,prenom_o,email_o,tel_o,day,month,year);
+	}
+	fclose(f);
+	fclose(tmp);
+	rename("src/users.tmp","src/users.txt");
+}
+
+void deluser(char cin[]){
+	char cin_o[20], login_o[20],password_o[20],nom_o[20],prenom_o[20],email_o[20],tel_o[20];
+	int role_o,day,month,year;
+	FILE *f,*tmp;
+        f=fopen("src/users.txt","r");
+	tmp=fopen("src/users.tmp","a+");
+	while(fscanf(f,"%s %s %s %d %s %s %s %s %d %d %d",cin_o, login_o,password_o,&role_o,nom_o,prenom_o,email_o,tel_o,&day,&month,&year)!=EOF){
+		if(!strcmp(cin,cin_o))
+			continue;
 		fprintf(tmp,"%s %s %s %d %s %s %s %s %d %d %d\n",cin_o, login_o,password_o,role_o,nom_o,prenom_o,email_o,tel_o,day,month,year);
 	}
 	fclose(f);

@@ -99,14 +99,15 @@ on_logout2_clicked                      (GtkWidget       *graphic,
         gtk_widget_show(login);
         gtk_widget_hide(current);
 }
-
 void
 on_add_clicked                         (GtkWidget       *graphic,
                                         gpointer         user_data)
 {
 	GtkWidget *add;
 	GtkWidget *current;
+	current = lookup_widget(graphic,"userlist");
 	add = create_add();
+	gtk_widget_hide(current);
 	gtk_widget_show(add);
 }
 
@@ -130,8 +131,10 @@ on_add_new_clicked                     (GtkWidget       *graphic,
 	GtkWidget *cin_in;
 	GtkWidget *newi;
 	GtkWidget *plistview;
-	//newi = lookup_widget(graphic,"userlist");
-        //plistview = lookup_widget(newi,"users_list");
+	GtkWidget *current;
+	newi = create_userlist();
+	current = lookup_widget(graphic,"add");
+        plistview = lookup_widget(newi,"users_list");
 	status = lookup_widget(graphic,"status_add_ad");
 	user_in = lookup_widget(graphic,"n_user");
 	pass_in = lookup_widget(graphic,"n_pass");
@@ -154,9 +157,9 @@ on_add_new_clicked                     (GtkWidget       *graphic,
 	month = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(mois_in));
 	year = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(anne_in));
 	ajouter (cin,username,password,nom,prenom,email,tel,day,month,year,2);
-	/*afficher(plistview,"user");
-	gtk_widget_hide(newi);
-	gtk_widget_show(newi);*/
+	afficher(plistview,"user");
+	gtk_widget_show(newi);
+	gtk_widget_hide(current);
 }
 
 
