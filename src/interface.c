@@ -1379,6 +1379,7 @@ create_ajouter_seance_kine (void)
   return ajouter_seance_kine;
 }
 
+
 GtkWidget*
 create_modifier_seance_kine (void)
 {
@@ -1392,9 +1393,10 @@ create_modifier_seance_kine (void)
   GtkWidget *entry10;
   GtkWidget *retour_modifier_kine;
   GtkWidget *modifier_sceance;
+  GtkWidget *label19;
+  GtkWidget *supprimer_seance;
 
   modifier_seance_kine = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-  gtk_widget_set_size_request (modifier_seance_kine, 363, 62);
   gtk_window_set_title (GTK_WINDOW (modifier_seance_kine), _("window2"));
 
   fixed6 = gtk_fixed_new ();
@@ -1444,11 +1446,24 @@ create_modifier_seance_kine (void)
   gtk_fixed_put (GTK_FIXED (fixed6), modifier_sceance, 296, 272);
   gtk_widget_set_size_request (modifier_sceance, 76, 29);
 
+  label19 = gtk_label_new ("");
+  gtk_widget_show (label19);
+  gtk_fixed_put (GTK_FIXED (fixed6), label19, 168, 40);
+  gtk_widget_set_size_request (label19, 128, 24);
+
+  supprimer_seance = gtk_button_new_with_mnemonic (_("Supprimer"));
+  gtk_widget_show (supprimer_seance);
+  gtk_fixed_put (GTK_FIXED (fixed6), supprimer_seance, 184, 272);
+  gtk_widget_set_size_request (supprimer_seance, 88, 29);
+
   g_signal_connect ((gpointer) retour_modifier_kine, "clicked",
                     G_CALLBACK (on_retour_modifier_clicked),
                     NULL);
   g_signal_connect ((gpointer) modifier_sceance, "clicked",
                     G_CALLBACK (on_modifier_sceance_kine_clicked),
+                    NULL);
+  g_signal_connect ((gpointer) supprimer_seance, "clicked",
+                    G_CALLBACK (on_supprimer_seance_clicked),
                     NULL);
 
   /* Store pointers to all widgets, for use by lookup_widget(). */
@@ -1462,6 +1477,9 @@ create_modifier_seance_kine (void)
   GLADE_HOOKUP_OBJECT (modifier_seance_kine, entry10, "entry10");
   GLADE_HOOKUP_OBJECT (modifier_seance_kine, retour_modifier_kine, "retour_modifier_kine");
   GLADE_HOOKUP_OBJECT (modifier_seance_kine, modifier_sceance, "modifier_sceance");
+  GLADE_HOOKUP_OBJECT (modifier_seance_kine, label19, "label19");
+  GLADE_HOOKUP_OBJECT (modifier_seance_kine, supprimer_seance, "supprimer_seance");
 
   return modifier_seance_kine;
 }
+

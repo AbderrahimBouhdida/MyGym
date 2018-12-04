@@ -75,5 +75,24 @@ void modifier_seance_kine(char nom[],char prenom[],char seance[])
 	fclose(tmp);
 	rename("src/rdv.tmp","src/rdv.txt");
 }
+void supprimer_kine(char nom[],char prenom[],char seance[])
+{
+	char nomk[20],prenomk[20],seancek[20];
+	FILE *f ,*tmp;
+	f=fopen("src/rdv.txt","r");
+	tmp=fopen("src/rdv.tmp","a+");
+	while(fscanf(f,"%s %s %s",nomk,prenomk,seancek)!=EOF){
+		if(!strcmp(nom,nomk) && !strcmp(prenom,prenomk)){
+			fprintf(tmp,"%s %s %s\n",nom="",prenom="",seance="");
+		}else
+		fprintf(tmp,"%s %s %s\n",nomk,prenomk,seancek);
+	}
+	fclose(f);
+	fclose(tmp);
+	rename("src/rdv.tmp","src/rdv.txt");
+}
+
+                          
+
                           
 

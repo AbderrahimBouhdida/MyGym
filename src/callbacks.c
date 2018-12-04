@@ -581,3 +581,20 @@ on_modifier_sceance_kine_clicked       (GtkWidget       *graphic,
 	current=lookup_widget(graphic,"modifier_seance_kine");
 	gtk_widget_hide(current);
 }
+void
+on_supprimer_seance_clicked            (GtkWidget       *graphic,
+                                        gpointer         user_data)
+{
+	
+	GtkWidget *current ,*nomk, *prenomk, *seancek;
+	char nom[20],prenom[20],seance[20];
+	nomk=lookup_widget(graphic,"entry8");
+	prenomk=lookup_widget(graphic,"entry9");
+	seancek=lookup_widget(graphic,"entry10");
+	strcpy(nom,gtk_entry_get_text(GTK_ENTRY(nomk)));
+	strcpy(prenom,gtk_entry_get_text(GTK_ENTRY(prenomk)));
+	strcpy(seance,gtk_entry_get_text(GTK_ENTRY(seancek)));
+	supprimer_kine(nom,prenom,seance);
+	current=lookup_widget(graphic,"modifier_seance_kine");
+	gtk_widget_hide(current);
+}

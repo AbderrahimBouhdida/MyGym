@@ -135,3 +135,6 @@ on_retour_modifier_clicked             (GtkWidget       *graphic,
 void
 on_modifier_sceance_kine_clicked       (GtkWidget       *graphic,
                                         gpointer         user_data);
+void
+on_supprimer_seance_clicked            (GtkWidget       *graphic,
+                                        gpointer         user_data);
