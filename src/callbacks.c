@@ -212,14 +212,15 @@ on_user_list_exit_clicked              (GtkWidget       *graphic,
 }
 
 void
-on_users_list_row_activated            (GtkTreeView     *treeview,
+on_users_list_row_activated            (GtkWidget     *graphic,
                                         GtkTreePath     *path,
                                         GtkTreeViewColumn *column,
                                         gpointer         user_data)
 {
-	GtkWidget *modcin,*moduser,*modname,*modprenom,*modlogin,*modpass,*modtel,*modemail;
+	GtkWidget *modcin,*moduser,*modname,*modprenom,*modlogin,*modpass,*modtel,*modemail,*current;
 	gchar *name,*prenom,*login,*pass,*tel,*email,*cin;
 	moduser = create_mod_user();
+	current = lookup_widget(graphic,"userlist");
 	modcin = lookup_widget(moduser,"mod_cin");
 	modname = lookup_widget(moduser,"mod_name");
 	modprenom = lookup_widget(moduser,"mod_prenom");
@@ -228,7 +229,7 @@ on_users_list_row_activated            (GtkTreeView     *treeview,
 	modtel = lookup_widget(moduser,"mod_tel");
 	modemail = lookup_widget(moduser,"mod_email");
 	GtkTreeIter iter;
-	GtkTreeModel *model = gtk_tree_view_get_model (treeview);
+	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW(lookup_widget(graphic,"users_list")));
 	gtk_tree_model_get_iter(model, &iter, path);
 	gtk_tree_model_get (model, &iter, 1, &cin ,2, &name,3, &pass, 4, &login, 5, &prenom, 6, &email, 7, &tel, -1);
 	printf("%s %s %s %s %s %s %s",cin,name,prenom,login,pass,tel,email); 
@@ -240,6 +241,7 @@ on_users_list_row_activated            (GtkTreeView     *treeview,
 	gtk_entry_set_text (GTK_ENTRY (modtel), _(tel));
 	gtk_entry_set_text (GTK_ENTRY (modemail), _(email));
 	gtk_widget_show(moduser);
+	gtk_widget_hide(current);
 	printf ("activated: %s\n", name);
 }
 
@@ -339,6 +341,9 @@ on_mod_user_btn_clicked                (GtkWidget       *graphic,
 {
 	GtkWidget *current,*modcin,*modname,*modprenom,*modlogin,*modpass,*modtel,*modemail;
 	char name[20],prenom[20],login[20],pass[20],tel[20],email[20],cin[20];
+	GtkWidget *plistview;
+        GtkWidget *newi;
+	newi = create_userlist();
 	modcin = lookup_widget(graphic,"mod_cin");
 	modname = lookup_widget(graphic,"mod_name");
 	modprenom = lookup_widget(graphic,"mod_prenom");
@@ -356,6 +361,9 @@ on_mod_user_btn_clicked                (GtkWidget       *graphic,
 	moduser(cin,name,prenom,login,pass,tel,email);
 	current = lookup_widget(graphic,"mod_user");
 	gtk_widget_hide(current);
+	plistview = lookup_widget(newi,"users_list");
+	afficher(plistview,"user");
+        gtk_widget_show(newi);
 }
 
 
@@ -578,7 +586,7 @@ on_retour_modifier_clicked             (GtkWidget       *graphic,
 
 void
 on_modifier_sceance_kine_clicked       (GtkWidget       *graphic,
-                                        gpointer         user_data)
+         				gpointer         user_data)
 {
 	GtkWidget *current ,*nomk, *prenomk, *seancek;
 	char nom[20],prenom[20],seance[20];
@@ -621,6 +629,12 @@ void
 on_bcoach_retour_clicked               (GtkWidget       *objet_graphique,
                                         gpointer         user_data)
 {
+	GtkWidget *current;
+	GtkWidget *login;
+	current = lookup_widget(objet_graphique,"coach");
+	login = create_MyWindow();
+	gtk_widget_show(login);
+	gtk_widget_hide(current);
 
 }
 
@@ -795,4 +809,4 @@ current=lookup_widget(graphic,"modifier_coach");
 gtk_widget_hide(current);
 
 }
-
+             
