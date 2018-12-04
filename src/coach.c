@@ -118,6 +118,22 @@ void modifier_seance_coach(char seance[], char date[], char type[])
 	fclose(tmp);
 	rename("src/seance.tmp","src/seance.txt");
 }
+void supprimer_seance_coach(char seance[], char date[], char type[])
+{
+	char seancek[20],datek[20],typek[20];
+	FILE *f , *tmp;
+	f=fopen("src/seance.txt","r");
+	tmp=fopen("src/seance.tmp","a+");
+	while(fscanf(f,"%s %s %s", seancek,datek,typek)!=EOF){
+		if(!strcmp(seance,seancek) && !strcmp(date,datek)){
+			fprintf(tmp,"%s %s %s\n",seance="",date="",type="");
+		}else
+		fprintf(tmp,"%s %s %s\n",seancek,datek,typek);
+	}
+	fclose(f);
+	fclose(tmp);
+	rename("src/seance.tmp","src/seance.txt");
+}
 
 
 

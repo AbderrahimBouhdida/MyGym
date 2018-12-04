@@ -1861,6 +1861,7 @@ create_coach_profil (void)
   GLADE_HOOKUP_OBJECT (coach_profil, label33, "label33");
 
   return coach_profil;
+
 }
 
 GtkWidget*
@@ -1884,6 +1885,11 @@ create_modifier_coach (void)
   GtkWidget *hbox9;
   GtkWidget *image9;
   GtkWidget *label35;
+  GtkWidget *supprimer_s_coach;
+  GtkWidget *alignment10;
+  GtkWidget *hbox10;
+  GtkWidget *image10;
+  GtkWidget *label36;
 
   modifier_coach = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_window_set_title (GTK_WINDOW (modifier_coach), _("modifier_coach"));
@@ -1967,11 +1973,35 @@ create_modifier_coach (void)
   gtk_widget_show (label35);
   gtk_box_pack_start (GTK_BOX (hbox9), label35, FALSE, FALSE, 0);
 
+  supprimer_s_coach = gtk_button_new ();
+  gtk_widget_show (supprimer_s_coach);
+  gtk_fixed_put (GTK_FIXED (fixed13), supprimer_s_coach, 32, 176);
+  gtk_widget_set_size_request (supprimer_s_coach, 104, 29);
+
+  alignment10 = gtk_alignment_new (0.5, 0.5, 0, 0);
+  gtk_widget_show (alignment10);
+  gtk_container_add (GTK_CONTAINER (supprimer_s_coach), alignment10);
+
+  hbox10 = gtk_hbox_new (FALSE, 2);
+  gtk_widget_show (hbox10);
+  gtk_container_add (GTK_CONTAINER (alignment10), hbox10);
+
+  image10 = gtk_image_new_from_stock ("gtk-delete", GTK_ICON_SIZE_BUTTON);
+  gtk_widget_show (image10);
+  gtk_box_pack_start (GTK_BOX (hbox10), image10, FALSE, FALSE, 0);
+
+  label36 = gtk_label_new_with_mnemonic (_("Supprimer"));
+  gtk_widget_show (label36);
+  gtk_box_pack_start (GTK_BOX (hbox10), label36, FALSE, FALSE, 0);
+
   g_signal_connect ((gpointer) coach_butmodifier, "clicked",
                     G_CALLBACK (on_coach_butmodifier_clicked),
                     NULL);
   g_signal_connect ((gpointer) buttretour_modi_coach, "clicked",
                     G_CALLBACK (on_buttretour_modi_coach_clicked),
+                    NULL);
+  g_signal_connect ((gpointer) supprimer_s_coach, "clicked",
+                    G_CALLBACK (on_supprimer_s_coach_clicked),
                     NULL);
 
   /* Store pointers to all widgets, for use by lookup_widget(). */
@@ -1993,7 +2023,13 @@ create_modifier_coach (void)
   GLADE_HOOKUP_OBJECT (modifier_coach, hbox9, "hbox9");
   GLADE_HOOKUP_OBJECT (modifier_coach, image9, "image9");
   GLADE_HOOKUP_OBJECT (modifier_coach, label35, "label35");
+  GLADE_HOOKUP_OBJECT (modifier_coach, supprimer_s_coach, "supprimer_s_coach");
+  GLADE_HOOKUP_OBJECT (modifier_coach, alignment10, "alignment10");
+  GLADE_HOOKUP_OBJECT (modifier_coach, hbox10, "hbox10");
+  GLADE_HOOKUP_OBJECT (modifier_coach, image10, "image10");
+  GLADE_HOOKUP_OBJECT (modifier_coach, label36, "label36");
 
   return modifier_coach;
+
 }
 

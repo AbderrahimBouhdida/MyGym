@@ -190,4 +190,7 @@ on_treeview3_row_activated             (GtkTreeView     *treeview,
 void
 on_coach_seanceretour_clicked          (GtkWidget      *graphic,
                                         gpointer         user_data);
+void
+on_supprimer_s_coach_clicked           (GtkWidget       *graphic,
+                                        gpointer         user_data);
 
