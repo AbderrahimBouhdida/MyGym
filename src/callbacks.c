@@ -768,4 +768,21 @@ GtkWidget *modifier_coach, *coach_profil;
 	gtk_widget_hide(modifier_coach);
 
 }
+void
+on_supprimer_s_coach_clicked           (GtkWidget      *graphic,
+                                        gpointer         user_data)
+{
+GtkWidget *current , *seancek , *datek, *typek;
+char seance[20],date[20],type[20];
+seancek=lookup_widget(graphic,"entry1");
+datek=lookup_widget(graphic,"entry2");
+typek=lookup_widget(graphic,"entry3");
+strcpy(seance,gtk_entry_get_text(GTK_ENTRY(seancek)));
+strcpy(date,gtk_entry_get_text(GTK_ENTRY(datek)));
+strcpy(type,gtk_entry_get_text(GTK_ENTRY(typek)));
+supprimer_seance_coach(seance,date,type);
+current=lookup_widget(graphic,"modifier_coach");
+gtk_widget_hide(current);
+
+}
 
