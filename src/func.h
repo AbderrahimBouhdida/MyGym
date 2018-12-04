@@ -4,3 +4,4 @@ void ajouter (char cin[],char login[],char password[],char nom[],char prenom[],c
 int getrole (char role[]);
 void getrolename(int role, char rolen[]);
 void moduser(char cin[],char name[],char prenom[],char login[],char pass[],char tel[],char email[]);
+void deluser(char cin[]);

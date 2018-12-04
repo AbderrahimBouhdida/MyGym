@@ -9,6 +9,7 @@
 #include "support.h"
 #include "func.h"
 #include "kine.h"
+#include "coach.h"
 
 void
 on_login_clicked                       (GtkWidget       *graphic,
@@ -50,9 +51,9 @@ on_login_clicked                       (GtkWidget       *graphic,
 			gtk_widget_hide(current);*/
 			break;
 		case 3 :
-			/*coach = create_coach();
+			coach = create_coach();
 			gtk_widget_show(coach);
-			gtk_widget_hide(current);*/
+			gtk_widget_hide(current);
 			break;
 		case 4 :
 			/*diet = create_diet();
@@ -98,14 +99,15 @@ on_logout2_clicked                      (GtkWidget       *graphic,
         gtk_widget_show(login);
         gtk_widget_hide(current);
 }
-
 void
 on_add_clicked                         (GtkWidget       *graphic,
                                         gpointer         user_data)
 {
 	GtkWidget *add;
 	GtkWidget *current;
+	current = lookup_widget(graphic,"userlist");
 	add = create_add();
+	gtk_widget_hide(current);
 	gtk_widget_show(add);
 }
 
@@ -129,8 +131,10 @@ on_add_new_clicked                     (GtkWidget       *graphic,
 	GtkWidget *cin_in;
 	GtkWidget *newi;
 	GtkWidget *plistview;
-	//newi = lookup_widget(graphic,"userlist");
-        //plistview = lookup_widget(newi,"users_list");
+	GtkWidget *current;
+	newi = create_userlist();
+	current = lookup_widget(graphic,"add");
+        plistview = lookup_widget(newi,"users_list");
 	status = lookup_widget(graphic,"status_add_ad");
 	user_in = lookup_widget(graphic,"n_user");
 	pass_in = lookup_widget(graphic,"n_pass");
@@ -153,9 +157,9 @@ on_add_new_clicked                     (GtkWidget       *graphic,
 	month = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(mois_in));
 	year = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(anne_in));
 	ajouter (cin,username,password,nom,prenom,email,tel,day,month,year,2);
-	/*afficher(plistview,"user");
-	gtk_widget_hide(newi);
-	gtk_widget_show(newi);*/
+	afficher(plistview,"user");
+	gtk_widget_show(newi);
+	gtk_widget_hide(current);
 }
 
 
@@ -164,8 +168,15 @@ on_quit1_clicked                       (GtkWidget       *graphic,
                                         gpointer         user_data)
 {
 	GtkWidget *current;
+	GtkWidget *plistview;
+        GtkWidget *newi;
+	newi = create_userlist();
+        plistview = lookup_widget(newi,"users_list");
+	afficher(plistview,"user");
+        gtk_widget_show(newi);	
 	current = lookup_widget(graphic,"add");
 	gtk_widget_hide(current);
+	
 }
 
 
@@ -581,20 +592,208 @@ on_modifier_sceance_kine_clicked       (GtkWidget       *graphic,
 	current=lookup_widget(graphic,"modifier_seance_kine");
 	gtk_widget_hide(current);
 }
+
+
+//coach
 void
-on_supprimer_seance_clicked            (GtkWidget       *graphic,
+on_bcoach_profil_clicked               (GtkWidget       *objet_graphique,
                                         gpointer         user_data)
 {
-	
-	GtkWidget *current ,*nomk, *prenomk, *seancek;
-	char nom[20],prenom[20],seance[20];
-	nomk=lookup_widget(graphic,"entry8");
-	prenomk=lookup_widget(graphic,"entry9");
-	seancek=lookup_widget(graphic,"entry10");
-	strcpy(nom,gtk_entry_get_text(GTK_ENTRY(nomk)));
-	strcpy(prenom,gtk_entry_get_text(GTK_ENTRY(prenomk)));
-	strcpy(seance,gtk_entry_get_text(GTK_ENTRY(seancek)));
-	supprimer_kine(nom,prenom,seance);
-	current=lookup_widget(graphic,"modifier_seance_kine");
-	gtk_widget_hide(current);
+GtkWidget *coach,*coach_profil,*List_View;
+coach_profil=create_coach_profil();
+coach=lookup_widget(objet_graphique,"coach");
+gtk_widget_hide(coach);
+List_View=lookup_widget(coach_profil,"treeview4");
+afficher_profil(List_View);
+gtk_widget_show (coach_profil);
 }
+
+
+void
+on_bcoach_dispo_clicked                (GtkWidget       *objet_graphique,
+                                        gpointer         user_data)
+{
+
+
+}
+
+
+void
+on_bcoach_retour_clicked               (GtkWidget       *objet_graphique,
+                                        gpointer         user_data)
+{
+
+}
+
+
+void
+on_bcoach_seance_clicked               (GtkWidget       *objet_graphique,
+                                        gpointer         user_data)
+{
+GtkWidget *coach,*coach_seance,*List_View;
+coach_seance=create_coach_seance();
+coach=lookup_widget(objet_graphique,"coach");
+gtk_widget_hide(coach);
+List_View=lookup_widget(coach_seance,"treeview3");
+afficher_fiches(List_View);
+gtk_widget_show (coach_seance);
+}
+
+
+void
+on_button1_clicked                     (GtkWidget       *objet_graphique,
+                                        gpointer         user_data)
+{
+
+}
+
+
+void
+on_bAjout_clicked                      (GtkWidget       *objet_graphique,
+                                        gpointer         user_data)
+{
+GtkWidget *coach_seance,*coach_ajout;
+coach_ajout=create_coach_ajout();
+gtk_widget_show (coach_ajout);
+coach_seance=lookup_widget(objet_graphique,"coach_seance");
+gtk_widget_hide(coach_seance);
+
+}
+
+
+void
+on_c_ajout_clicked                     (GtkWidget    *objet_graphique,
+                                        gpointer         user_data)
+{
+GtkWidget *a ,*b,*c ,*coach_ajout;
+	char seance[20],date[20],type[20];
+	
+	a=lookup_widget(objet_graphique,"c_entry1");
+	b=lookup_widget(objet_graphique,"c_entry2");
+	c=lookup_widget(objet_graphique,"c_entry3");
+	strcpy(seance,gtk_entry_get_text(GTK_ENTRY(a)));
+	strcpy(date,gtk_entry_get_text(GTK_ENTRY(b)));
+        strcpy(type,gtk_entry_get_text(GTK_ENTRY(c)));
+        ajouter_fiches(seance,date,type);
+
+
+}
+
+
+void
+on_c_retour_clicked                    (GtkWidget       *objet_graphique,
+                                        gpointer         user_data)
+{
+GtkWidget *coach_ajout, *coach_seance;
+	coach_seance= lookup_widget(objet_graphique,"coach_seance");
+	coach_seance=create_coach_seance();
+	gtk_widget_show (coach_seance);
+	gtk_widget_hide(coach_ajout);
+
+}
+
+
+void
+on_coach_bretour_clicked               (GtkWidget      *objet_graphique,
+                                        gpointer         user_data)
+{
+GtkWidget *coach,*coach_profil;
+coach=create_coach();
+gtk_widget_show (coach);
+gtk_widget_hide(coach_profil);
+
+}
+
+
+
+void
+on_coach_butmodifier_clicked           (GtkWidget      *graphic,
+                                        gpointer         user_data)
+{
+GtkWidget *current , *seancek , *datek, *typek;
+char seance[20],date[20],type[20];
+seancek=lookup_widget(graphic,"entry1");
+datek=lookup_widget(graphic,"entry2");
+typek=lookup_widget(graphic,"entry3");
+strcpy(seance,gtk_entry_get_text(GTK_ENTRY(seancek)));
+strcpy(date,gtk_entry_get_text(GTK_ENTRY(datek)));
+strcpy(type,gtk_entry_get_text(GTK_ENTRY(typek)));
+modifier_seance_coach(seance,date,type);
+current=lookup_widget(graphic,"modifier_coach");
+gtk_widget_hide(current);
+}
+
+
+
+void
+on_buttretour_modi_coach_clicked       (GtkWidget      *graphic,
+                                        gpointer         user_data)
+{
+GtkWidget *modifier_coach,*coach_seance ,*List_view;
+modifier_coach=lookup_widget(graphic,"modifier_coach");
+//coach_seance=create_coach_seance();
+gtk_widget_hide(modifier_coach);
+/*List_view=lookup_widget(coach_seance,"treeview3");
+afficher_coach(List_view);
+gtk_widget_show(coach_seance); */
+
+}
+
+
+void
+on_treeview3_row_activated             (GtkTreeView     *treeview,
+                                        GtkTreePath     *path,
+                                        GtkTreeViewColumn *column,
+                                        gpointer         user_data)
+{
+
+{GtkWidget *modifier_coach, *c_seance, *c_date, *c_type;
+gchar *seance, *date, *type;
+modifier_coach = create_modifier_coach();
+c_seance=lookup_widget(modifier_coach, "entry1");
+c_date=lookup_widget(modifier_coach, "entry2");
+c_type=lookup_widget(modifier_coach, "entry3");
+GtkTreeIter iter;
+GtkTreeModel *model=gtk_tree_view_get_model (treeview);
+gtk_tree_model_get_iter(model,&iter,path);
+gtk_tree_model_get(model,&iter,0,&seance,1,&date,2, &type, -1);
+printf("%s %s %s", seance,date,type);
+gtk_entry_set_text(GTK_ENTRY (c_seance),_(seance));
+gtk_entry_set_text(GTK_ENTRY (c_date),_(date));
+gtk_entry_set_text(GTK_ENTRY (c_type),_(type));
+gtk_widget_show(modifier_coach);
+}
+
+
+}
+
+
+void
+on_coach_seanceretour_clicked          (GtkWidget       *graphic,
+                                        gpointer         user_data)
+{
+GtkWidget *modifier_coach, *coach_profil;
+	coach_profil=create_coach_profil();
+	gtk_widget_show (coach_profil);
+	coach_profil= lookup_widget(graphic,"coach_profil");
+	gtk_widget_hide(modifier_coach);
+
+}
+void
+on_supprimer_s_coach_clicked           (GtkWidget      *graphic,
+                                        gpointer         user_data)
+{
+GtkWidget *current , *seancek , *datek, *typek;
+char seance[20],date[20],type[20];
+seancek=lookup_widget(graphic,"entry1");
+datek=lookup_widget(graphic,"entry2");
+typek=lookup_widget(graphic,"entry3");
+strcpy(seance,gtk_entry_get_text(GTK_ENTRY(seancek)));
+strcpy(date,gtk_entry_get_text(GTK_ENTRY(datek)));
+strcpy(type,gtk_entry_get_text(GTK_ENTRY(typek)));
+supprimer_seance_coach(seance,date,type);
+current=lookup_widget(graphic,"modifier_coach");
+gtk_widget_hide(current);
+
+}
+
